@@ -27,27 +27,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        packettable.h
-        packettable.cpp
-        analyzer.h
-        analyzer.cpp
-        networklistener.h
+if (UNIX AND NOT APPLE)
 
-    if (WIN32)
-        networklistenerwin.h
-        networklistenerwin.cpp
-    endif (WIN32)
-
-    if (UNIX)
-        networklistenerlin.h
-        networklistenerlin.cpp
-    endif(UNIX)
-    )
+    set(PROJECT_SOURCES
+            main.cpp
+            mainwindow.cpp
+            mainwindow.h
+            mainwindow.ui
+            packettable.h
+            packettable.cpp
+            analyzer.h
+            analyzer.cpp
+            networklistener.h
+            networklistenerlin.h
+            networklistenerlin.cpp
+            networklistenerfactory.h
+        )
+endif(UNIX)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(BigBrother
@@ -61,18 +57,11 @@ else()
         )
     else()
         add_executable(BigBrother
-            ${PROJECT_SOURCES}
-        )
+            ${PROJECT_SOURCES})
     endif()
 endif()
 
-target_link_libraries(BigBrother
-    PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-
-    if (WIN32)
-        ws2_32
-    endif(WIN32)
-    )
+target_link_libraries(BigBrother PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 set_target_properties(BigBrother PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
