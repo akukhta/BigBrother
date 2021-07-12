@@ -42,6 +42,13 @@ if (UNIX AND NOT APPLE)
             networklistenerlin.h
             networklistenerlin.cpp
             networklistenerfactory.h
+            lindeviceswidges.ui
+            lindeviceswidges.h
+            lindeviceswidges.cpp
+            linuxnetworkdevice.h
+            linuxnetworkdevice.cpp
+            linuxdevicesmanager.h
+            linuxdevicesmanager.cpp
         )
 endif(UNIX)
 

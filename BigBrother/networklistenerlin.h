@@ -36,7 +36,7 @@ public:
 
 private:
     int sockfd;
-    sockaddr_in addr;
+    ifreq ethreq;
 };
 
 #endif

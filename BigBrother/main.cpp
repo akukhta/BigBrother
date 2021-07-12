@@ -29,12 +29,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    if (listener)
-    {
-        std::cout << "Ok";
-    }
-    else
-        std::cout << "No";
     Analyzer analyzer(std::move(window), table, std::move(listener));
     return a.exec();
 }

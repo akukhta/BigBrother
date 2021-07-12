@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->formLayout->addRow(new LinDevicesWidges());
 }
 
 QTableWidget* MainWindow::getTable()

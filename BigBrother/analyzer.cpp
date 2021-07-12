@@ -17,5 +17,5 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
 
     this->window->show();
     this->table->addRow("Hello World!");
-    this->listener->ScanNetwork();
+  //  this->listener->ScanNetwork();
 }

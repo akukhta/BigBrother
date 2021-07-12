@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include "lindeviceswidges.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
