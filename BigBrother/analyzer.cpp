@@ -1,7 +1,7 @@
 #include "analyzer.h"
 
-Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<NetworkListener> listener)
-    : window(std::move(window)), table(std::move(table)), listener(std::move(listener))
+Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table)
+    : window(std::move(window)), table(std::move(table))
 {
 
     if (!this->window || !this->table)
@@ -9,17 +9,6 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
         throw std::runtime_error("Can not own UI objects!");
     }
 
-    if (!this->listener)
-    {
-        throw std::runtime_error("Can not own network listener!");
-    }
-
     this->window->show();
     this->table->addRow("Hello World!");
-
-    auto threadingFunc = [this]()
-        {
-            this->listener->ScanNetwork();
-        };
-
 }

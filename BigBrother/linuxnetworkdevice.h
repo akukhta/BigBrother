@@ -1,15 +1,14 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "lindeviceswidges.h"
 
 class LinuxNetworkDevice
 {
 public:
     LinuxNetworkDevice(std::string name, std::string address, bool isEnabled, size_t MTU);
-
+    std::string name;
 private:
-    std::string name, addresStr;
+    std::string addresStr;
     bool isEnabled;
     size_t MTU;
 };

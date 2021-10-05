@@ -1,7 +1,6 @@
-#ifndef LINDEVICESWIDGES_H
-#define LINDEVICESWIDGES_H
-
+#pragma once
 #include <QWidget>
+#include "linuxdevicesmanager.h"
 
 namespace Ui {
 class LinDevicesWidges;
@@ -18,5 +17,3 @@ public:
 private:
     Ui::LinDevicesWidges *ui;
 };
-
-#endif // LINDEVICESWIDGES_H

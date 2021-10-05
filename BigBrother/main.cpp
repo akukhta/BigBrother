@@ -4,6 +4,7 @@
 #include "mainwindow.h"
 #include "analyzer.h"
 #include "networklistenerfactory.h"
+#include "linuxdevicesmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +18,6 @@ int main(int argc, char *argv[])
     {
         window = std::make_unique<MainWindow>();
         table = std::make_shared<PacketTable>(window->getTable());
-        listener = GetTargetListener(table);
     }
 
     catch(std::runtime_error const &err)
@@ -29,6 +29,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    Analyzer analyzer(std::move(window), table, std::move(listener));
+    Analyzer analyzer(std::move(window), table);
     return a.exec();
 }
