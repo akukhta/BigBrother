@@ -37,6 +37,7 @@ public:
 private:
     int sockfd;
     ifreq ethreq;
+    unsigned short int const maxPacket = 65536;
 };
 
 #endif

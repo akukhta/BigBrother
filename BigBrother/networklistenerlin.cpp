@@ -30,11 +30,12 @@ NetworkListenerLin::NetworkListenerLin(std::shared_ptr<PacketTable> const &table
 
 void NetworkListenerLin::ScanNetwork()
 {
-    char* data = new char[1536];
+    std::vector<unsigned char> buffer(maxPacket);
 
-    while(true)
+    isRunning.store(true);
+
+    while(isRunning.load())
     {
-        recvfrom(sockfd, data, 1536, 0, NULL, NULL);
-        std::cout << std::string(data) << std::endl;
+        recvfrom(sockfd, buffer.data(), maxPacket, 0, NULL, NULL);
     }
 }

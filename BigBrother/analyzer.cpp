@@ -1,5 +1,4 @@
 #include "analyzer.h"
-#include <iostream>
 
 Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<NetworkListener> listener)
     : window(std::move(window)), table(std::move(table)), listener(std::move(listener))
@@ -17,5 +16,10 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
 
     this->window->show();
     this->table->addRow("Hello World!");
-  //  this->listener->ScanNetwork();
+
+    auto threadingFunc = [this]()
+        {
+            this->listener->ScanNetwork();
+        };
+
 }

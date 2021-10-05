@@ -1,5 +1,6 @@
 #pragma once
 
+#include <thread>
 #include "mainwindow.h"
 #include "networklistener.h"
 
@@ -13,5 +14,6 @@ private:
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
     std::unique_ptr<NetworkListener> listener;
+    std::thread listeningThread;
 };
 

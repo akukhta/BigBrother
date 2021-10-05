@@ -1,7 +1,7 @@
 #pragma once
+#include <atomic>
 #include "packettable.h"
 #define RCVALL 0x98000001
-#include <iostream>
 class NetworkListener
 {
 public:
@@ -22,4 +22,5 @@ public:
 protected:
     std::weak_ptr<PacketTable> table;
     std::string hostName;
+    std::atomic_bool isRunning;
 };

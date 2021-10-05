@@ -1,7 +1,13 @@
 #pragma once
 #include "networklistener.h"
-#include "networklistenerlin.h"
-#include "networklistenerwin.h"
+
+#ifdef __unix
+    #include "networklistenerlin.h"
+#endif
+
+#ifdef __win32__
+    #include "networklistenerwin.h"
+#endif
 
 std::unique_ptr<NetworkListener> GetTargetListener(std::shared_ptr<PacketTable> const &table)
 {
