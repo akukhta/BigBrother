@@ -1,9 +1,12 @@
 #pragma once
 
 #include <thread>
-#include "mainwindow.h"
 #include "networklistener.h"
+#include "networklistenerfactory.h"
+#include "mainwindow.h"
 
+//Generic class
+//Todo: make IP Header
 class Analyzer
 {
 public:
@@ -12,7 +15,9 @@ public:
 private:
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
-    std::unique_ptr<NetworkListener> listener;
-    std::thread listeningThread;
+    std::vector<std::unique_ptr<NetworkListener>> listener;
+    void startListening(std::vector<NetworkDevice>);
+    void stopListening();
+
 };
 

@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
-    std::unique_ptr<NetworkListener> listener;
 
     try
     {

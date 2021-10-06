@@ -4,6 +4,7 @@
 #include <QTableWidget>
 #include "lindeviceswidges.h"
 
+//Main UI class
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -16,6 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     QTableWidget* getTable();
     ~MainWindow();
+    LinDevicesWidges *wid;
 
 private:
     Ui::MainWindow *ui;
