@@ -1,9 +1,10 @@
-#define pragma_once
+#pragma once
 
 #include <memory>
 #include <QTableWidget>
 #include <mutex>
 
+//Packet table
 class PacketTable
 {
 public:

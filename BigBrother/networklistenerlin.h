@@ -26,13 +26,13 @@
 #include <sys/eventfd.h>
 #include "networklistener.h"
 
+//Linux class for network listening
 class NetworkListenerLin : public NetworkListener
 {
 
 public:
-    NetworkListenerLin(std::shared_ptr<PacketTable> const &table);
+    NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device);
     virtual void ScanNetwork() override;
-    ~NetworkListenerLin() { std::cout << "DESTRUCTED!";}
 
 private:
     int sockfd;

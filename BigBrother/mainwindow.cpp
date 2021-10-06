@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-//    ui->gridLayout->addWidget(new LinDevicesWidges(),1,2);
+    wid = new LinDevicesWidges();
     auto _layout = new QVBoxLayout();
-    _layout->addWidget(new LinDevicesWidges());
+    _layout->addWidget(wid);
     ui->frame->setLayout(_layout);
 
 }

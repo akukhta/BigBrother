@@ -45,10 +45,13 @@ if (UNIX AND NOT APPLE)
             lindeviceswidges.ui
             lindeviceswidges.h
             lindeviceswidges.cpp
-            linuxnetworkdevice.h
-            linuxnetworkdevice.cpp
+            networkdevice.h
+            networkdevice.cpp
+            networkdevicemanager.h
+            networkdevicemanager.cpp
             linuxdevicesmanager.h
             linuxdevicesmanager.cpp
+            networkdevicefactory.cpp
         )
 endif(UNIX)
 

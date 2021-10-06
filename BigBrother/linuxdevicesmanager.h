@@ -2,13 +2,14 @@
 #include <vector>
 #include <filesystem>
 #include <fstream>
-#include "linuxnetworkdevice.h"
+#include "networkdevice.h"
 
+//Class to get devices' list
 class LinuxDevicesManager
 {
 public:
     LinuxDevicesManager() = delete;
-    static std::vector<LinuxNetworkDevice> getDevices();
+    static std::vector<NetworkDevice> getDevices();
 
 private:
     static std::string readLine(std::string fileName);
