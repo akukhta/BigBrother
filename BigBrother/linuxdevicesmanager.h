@@ -8,7 +8,7 @@ class LinuxDevicesManager
 {
 public:
     LinuxDevicesManager() = delete;
-    static std::vector<LinuxNetworkDevice> getDevices();
+    static std::vector<NetworkDevice> getDevices();
 
 private:
     static std::string readLine(std::string fileName);

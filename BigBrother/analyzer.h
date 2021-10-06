@@ -12,7 +12,10 @@ public:
 private:
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
-    std::unique_ptr<NetworkListener> listener;
+    std::vector<NetworkListener>listeners;
     std::thread listeningThread;
+    std::vector<NetworkDevice> selectedDevices;
+    void startListening(std::vector<NetworkDevice> selectedDevices);
+    void getSelectedDevices(std::vector<NetworkDevice> selectedDevices);
 };
 

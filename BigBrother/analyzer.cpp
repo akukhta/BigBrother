@@ -12,3 +12,13 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
     this->window->show();
     this->table->addRow("Hello World!");
 }
+
+void Analyzer::startListening(std::vector<NetworkDevice> selectedDevices)
+{
+    getSelectedDevices(selectedDevices);
+}
+
+void Analyzer::getSelectedDevices(std::vector<NetworkDevice> selectedDevices)
+{
+    this->selectedDevices = selectedDevices;
+}

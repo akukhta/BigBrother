@@ -3,9 +3,9 @@
 std::string LinuxDevicesManager::undef = "undefined";
 size_t LinuxDevicesManager::defaultSize = 1500;
 
-std::vector<LinuxNetworkDevice> LinuxDevicesManager::getDevices()
+std::vector<NetworkDevice> LinuxDevicesManager::getDevices()
 {
-    std::vector<LinuxNetworkDevice> devices;
+    std::vector<NetworkDevice> devices;
     std::filesystem::path netDevices = "////sys//class//net";
 
     for(auto &device : std::filesystem::directory_iterator(netDevices))
