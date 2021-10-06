@@ -2,10 +2,10 @@
 #include <vector>
 #include <string>
 
-class NetworkDevice
+class LinuxNetworkDevice
 {
 public:
-    NetworkDevice(std::string name, std::string address, bool isEnabled, size_t MTU);
+    LinuxNetworkDevice(std::string name, std::string address, bool isEnabled, size_t MTU);
     std::string name;
 private:
     std::string addresStr;

@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     QTableWidget* getTable();
-    LinDevicesWidges *wid;
     ~MainWindow();
 
 private:
