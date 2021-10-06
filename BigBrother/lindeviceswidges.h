@@ -14,7 +14,7 @@ class LinDevicesWidges : public QWidget
     Q_OBJECT
 
 private:
-    using callbackFunction = std::function<void(std::vector<NetworkDevice>)>;
+    using callbackFunction = std::function<void(std::unique_ptr<std::vector<NetworkDevice>>)>;
     using stopCallbackFunction = std::function<void()>;
 public:
     explicit LinDevicesWidges(QWidget *parent = nullptr);

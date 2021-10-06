@@ -38,17 +38,17 @@ void LinDevicesWidges::on_pushButton_clicked()
 {
     if (!isRunning)
     {
-        std::vector<NetworkDevice> selectedDevices;
+        std::unique_ptr<std::vector<NetworkDevice>> selectedDevices = std::make_unique<std::vector<NetworkDevice>>();
 
         for (size_t i = 0; i < ui->listWidget->count(); i++)
         {
             if (ui->listWidget->item(i)->checkState() == Qt::Checked)
             {
-                selectedDevices.push_back(devicesTable.at(ui->listWidget->item(i)));
+                selectedDevices->push_back(devicesTable.at(ui->listWidget->item(i)));
             }
         }
 
-        func(selectedDevices);
+        func(std::move(selectedDevices));
         ui->pushButton->setText(stopListeningMsg);
         isRunning = true;
     }

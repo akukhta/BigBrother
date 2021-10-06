@@ -17,17 +17,17 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
 
     this->window->show();
     this->window->wid->addCallbackFunction
-            ([this](std::vector<NetworkDevice> devices){startListening(devices);});
+            ([this](std::unique_ptr<std::vector<NetworkDevice>> devices){startListening(std::move(devices));});
     this->window->wid->addStopCallbackFunction([this](){stopListening();});
 
     this->table->addRow("Hello World!");
 }
 
-void Analyzer::startListening(std::vector<NetworkDevice> selectedDevices)
+void Analyzer::startListening(std::unique_ptr<std::vector<NetworkDevice>> selectedDevices)
 {
     listener.clear();
 
-    for (auto const & device : selectedDevices)
+    for (auto const & device : *selectedDevices)
     {
         listener.push_back(std::move(getListener(device, table)));
         std::thread([this](){listener.back()->ScanNetwork();}).detach();

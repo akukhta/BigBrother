@@ -16,7 +16,7 @@ private:
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
     std::vector<std::unique_ptr<NetworkListener>> listener;
-    void startListening(std::vector<NetworkDevice>);
+    void startListening(std::unique_ptr<std::vector<NetworkDevice>>);
     void stopListening();
 
 };
