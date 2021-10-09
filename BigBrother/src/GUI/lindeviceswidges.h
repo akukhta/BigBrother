@@ -2,7 +2,7 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include <unordered_map>
-#include "linuxdevicesmanager.h"
+#include "Linux/linuxdevicesmanager.h"
 
 //Widget panel to get devices to catch
 namespace Ui {

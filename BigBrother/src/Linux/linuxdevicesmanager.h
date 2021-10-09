@@ -2,7 +2,7 @@
 #include <vector>
 #include <filesystem>
 #include <fstream>
-#include "networkdevice.h"
+#include "Net/networkdevice.h"
 
 //Class to get devices' list
 class LinuxDevicesManager

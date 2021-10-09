@@ -1,5 +1,5 @@
-#include "networkdevice.h"
-#include "linuxdevicesmanager.h"
+#include "Net/networkdevice.h"
+#include "Linux/linuxdevicesmanager.h"
 
 std::string LinuxDevicesManager::undef = "undefined";
 size_t LinuxDevicesManager::defaultSize = 1500;

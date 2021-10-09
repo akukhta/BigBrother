@@ -1,7 +1,7 @@
 #pragma once
 #include <atomic>
-#include "networkdevice.h"
-#include "packettable.h"
+#include "Net/networkdevice.h"
+#include "Common/packettable.h"
 #define RCVALL 0x98000001
 
 //Main class

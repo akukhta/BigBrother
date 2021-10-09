@@ -1,9 +1,9 @@
 #pragma once
 
 #include <thread>
-#include "networklistener.h"
-#include "networklistenerfactory.h"
-#include "mainwindow.h"
+#include "Net/networklistener.h"
+#include "Net/networklistenerfactory.h"
+#include "GUI/mainwindow.h"
 
 //Generic class
 //Todo: make IP Header

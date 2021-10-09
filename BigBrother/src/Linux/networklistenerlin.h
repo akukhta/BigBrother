@@ -24,7 +24,7 @@
 #include <poll.h>
 #include <dirent.h>
 #include <sys/eventfd.h>
-#include "networklistener.h"
+#include "Net/networklistener.h"
 
 //Linux class for network listening
 class NetworkListenerLin : public NetworkListener

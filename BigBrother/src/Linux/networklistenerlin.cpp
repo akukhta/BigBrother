@@ -26,19 +26,28 @@ NetworkListenerLin::NetworkListenerLin(std::shared_ptr<PacketTable> const &table
         throw std::runtime_error("ioctl: set ifflags");
     }
 
+//    if (setsockopt(sockfd, SOL_SOCKET, SO_BINDTODEVICE, &ethreq, sizeof(ethreq)) < 0)
+//    {
+//        throw std::runtime_error("setsockopt: can`t bind socket to specific device");
+//    }
+
 }
 
 void NetworkListenerLin::ScanNetwork()
 {   
-    std::vector<unsigned char> buffer(device.MTU);
+    std::vector<unsigned char> buffer(maxPacket);
+    ssize_t received;
 
     isRunning.store(true);
 
     while(isRunning.load())
     {
-        recvfrom(sockfd, buffer.data(), maxPacket, 0, NULL, NULL);
-        std::cout << std::this_thread::get_id() << "is running" << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        received = recvfrom(sockfd, buffer.data(), maxPacket, 0, NULL, NULL);
 
+        if (received > 0)
+        {
+            std::cout << std::this_thread::get_id() << "is running" << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(5));
+        }
     }
 }

@@ -30,28 +30,32 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 if (UNIX AND NOT APPLE)
 
     set(PROJECT_SOURCES
-            main.cpp
-            mainwindow.cpp
-            mainwindow.h
-            mainwindow.ui
-            packettable.h
-            packettable.cpp
-            analyzer.h
-            analyzer.cpp
-            networklistener.h
-            networklistenerlin.h
-            networklistenerlin.cpp
-            networklistenerfactory.h
-            lindeviceswidges.ui
-            lindeviceswidges.h
-            lindeviceswidges.cpp
-            networkdevice.h
-            networkdevice.cpp
-            networkdevicemanager.h
-            networkdevicemanager.cpp
-            linuxdevicesmanager.h
-            linuxdevicesmanager.cpp
-            networkdevicefactory.cpp
+            Common/main.cpp
+            GUI/mainwindow.cpp
+            GUI/mainwindow.h
+            GUI/mainwindow.ui
+            Common/packettable.h
+            Common/packettable.cpp
+            Common/analyzer.h
+            Common/analyzer.cpp
+            Net/networklistener.h
+            Linux/networklistenerlin.h
+            Linux/networklistenerlin.cpp
+            Net/networklistenerfactory.h
+            GUI/lindeviceswidges.ui
+            GUI/lindeviceswidges.h
+            GUI/lindeviceswidges.cpp
+            Net/networkdevice.h
+            Net/networkdevice.cpp
+            Linux/linuxdevicesmanager.h
+            Linux/linuxdevicesmanager.cpp
+            Net/networkdevicefactory.cpp
+            Net/EthernetHeader.h
+            Net/EthernetIIHeader.h
+            Net/ProtocolHeader.h
+            Net/IPv4Header.h
+            Net/TransportHeader.h
+            Net/TCPHeader.h
         )
 endif(UNIX)
 
