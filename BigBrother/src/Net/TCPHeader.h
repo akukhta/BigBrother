@@ -13,17 +13,42 @@ private:
     std::uint32_t sequenceNumber;
     std::uint32_t ackNumber;
 
-#if defined (__ORDER_BIG_ENDIAN__)
-    std::uint16_t headerLength : 4;
-    std::uint16_t reservedBits : 6;
-    std::uint16_t urg : 1;
-    std::uint16_t ack : 1;
-    std::uint16_t psh : 1;
-    std::uint16_t rst : 1;
-    std::uint16_t syn : 1;
-    std::uint16_t fin : 1;
-#elif defined ()
-    std::uint16_t fin : 1;
-    //TODO: Implement TCP and UDP Headers and continue work on the project
+#if defined (__BIG_ENDIAN__)
+    std::byte headerLength : 4;
+    std::byte reservedBits : 4;
+#elif defined (__LITTLE_ENDIAN__)
+    std::byte reservedBits : 4;
+    std::byte headerLength : 4;
 #endif
+
+    struct flag
+    {
+
+#if defined (__BIG_ENDIAN__)
+        std::byte cwr : 1;
+        std::byte ece : 1;
+        std::byte urg : 1;
+        std::byte ack : 1;
+        std::byte psh : 1;
+        std::byte rst : 1;
+        std::byte syn : 1;
+        std::byte fin : 1;
+
+#elif defined (__LITTLE_ENDIAN__)
+
+        std::byte fin : 1;
+        std::byte syn : 1;
+        std::byte rst : 1;
+        std::byte psh : 1;
+        std::byte ack : 1;
+        std::byte urg : 1;
+        std::byte ece : 1;
+        std::byte cwr : 1;
+#endif
+
+    } flags;
+
+    std::uint16_t windowSize;
+    std::uint16_t checkSum;
+    std::uint16_t urgentPointer;
 };

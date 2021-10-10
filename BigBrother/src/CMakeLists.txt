@@ -56,6 +56,7 @@ if (UNIX AND NOT APPLE)
             Net/IPv4Header.h
             Net/TransportHeader.h
             Net/TCPHeader.h
+            Net/UDPHeader.h
         )
 endif(UNIX)
 
