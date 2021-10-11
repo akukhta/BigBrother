@@ -33,11 +33,10 @@ class NetworkListenerLin : public NetworkListener
 public:
     NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device, std::function<void (std::vector<unsigned char>)> handlerFunc);
     virtual void ScanNetwork() override;
-
+    static unsigned short int const maxPacket = 65535;
 private:
     int sockfd;
     ifreq ethreq;
-    unsigned short int const maxPacket = 65536;
 };
 
 #endif
