@@ -2,8 +2,8 @@
 #include <iostream>
 #include <thread>
 
-NetworkListenerLin::NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device)
-    : NetworkListener(table, device)
+NetworkListenerLin::NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device, std::function<void (std::vector<unsigned char>)> handlerFunc)
+    : NetworkListener(table, device, handlerFunc)
 {
     sockfd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
 
@@ -40,14 +40,17 @@ void NetworkListenerLin::ScanNetwork()
 
     isRunning.store(true);
 
+    struct sockaddr saddr;
+    int saddr_len = sizeof (saddr);
+
     while(isRunning.load())
     {
+        //received = recvfrom(sockfd, buffer.data(), maxPacket, 0, &saddr, (socklen_t*) &saddr_len);
         received = recvfrom(sockfd, buffer.data(), maxPacket, 0, NULL, NULL);
-
         if (received > 0)
         {
             std::cout << std::this_thread::get_id() << "is running" << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(5));
+            handlerFunc(std::move(std::vector<unsigned char>(buffer.begin(), buffer.begin() + received)));
         }
     }
 }

@@ -31,7 +31,7 @@ class NetworkListenerLin : public NetworkListener
 {
 
 public:
-    NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device);
+    NetworkListenerLin(std::shared_ptr<PacketTable> const &table, NetworkDevice device, std::function<void (std::vector<unsigned char>)> handlerFunc);
     virtual void ScanNetwork() override;
 
 private:

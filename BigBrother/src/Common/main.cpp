@@ -16,11 +16,13 @@ int main(int argc, char *argv[])
 
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
+    std::unique_ptr<PacketHandler> handler;
 
     try
     {
         window = std::make_unique<MainWindow>();
         table = std::make_shared<PacketTable>(window->getTable());
+        handler = std::make_unique<PacketHandler>();
     }
 
     catch(std::runtime_error const &err)
@@ -38,6 +40,6 @@ int main(int argc, char *argv[])
     std::cout << "IPv4 size:" << sizeof(IPv4Header) - sizeof(ProtocolHeader) << std::endl;
     std::cout << "TCP size:" << sizeof(TCPHeader) - sizeof(TransportHeader) << std::endl;
     std::cout << "UDP size:" << sizeof(UDPHeader) - sizeof(TransportHeader) << std::endl;
-    Analyzer analyzer(std::move(window), table);
+    Analyzer analyzer(std::move(window), table, std::move(handler));
     return a.exec();
 }

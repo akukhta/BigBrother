@@ -6,8 +6,8 @@
 #endif
 
 
-Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table)
-    : window(std::move(window)), table(std::move(table))
+Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<PacketHandler> handler)
+    : window(std::move(window)), table(std::move(table)), handler(std::move(handler))
 {
 
     if (!this->window || !this->table)
@@ -21,6 +21,7 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
     this->window->wid->addStopCallbackFunction([this](){stopListening();});
 
     this->table->addRow("Hello World!");
+    //this->handler->startHandling();
 }
 
 void Analyzer::startListening(std::unique_ptr<std::vector<NetworkDevice>> selectedDevices)
@@ -29,7 +30,7 @@ void Analyzer::startListening(std::unique_ptr<std::vector<NetworkDevice>> select
 
     for (auto const & device : *selectedDevices)
     {
-        listener.push_back(std::move(getListener(device, table)));
+        listener.push_back(std::move(getListener(device, table, addingHandler)));
         std::thread([this](){listener.back()->ScanNetwork();}).detach();
     }
 }

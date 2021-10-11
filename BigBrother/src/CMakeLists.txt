@@ -57,6 +57,8 @@ if (UNIX AND NOT APPLE)
             Net/TransportHeader.h
             Net/TCPHeader.h
             Net/UDPHeader.h
+            Common/packethandler.h
+            Common/packethandler.cpp
         )
 endif(UNIX)
 
