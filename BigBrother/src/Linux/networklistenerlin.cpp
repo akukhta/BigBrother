@@ -46,7 +46,7 @@ void NetworkListenerLin::ScanNetwork()
     while(isRunning.load())
     {
         //received = recvfrom(sockfd, buffer.data(), maxPacket, 0, &saddr, (socklen_t*) &saddr_len);
-        received = recvfrom(sockfd, buffer.data(), maxPacket, 0, NULL, NULL);
+        received = recvfrom(sockfd, buffer.data(), 1500, 0, NULL, NULL);
         if (received > 0)
         {
             std::cout << std::this_thread::get_id() << "is running" << std::endl;
