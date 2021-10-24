@@ -60,6 +60,7 @@ if (UNIX AND NOT APPLE)
             Net/UDPHeader.h
             Common/packethandler.h
             Common/packethandler.cpp
+            Common/utiles.h
         )
 endif(UNIX)
 
