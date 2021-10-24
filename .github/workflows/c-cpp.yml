@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     
 env:
-  APP_PATH: "BigBrother/BigBrother"
+  APP_PATH: "./BigBrother/BigBrother"
 
 jobs:
   build:
