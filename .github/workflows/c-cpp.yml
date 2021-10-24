@@ -1,0 +1,32 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+    
+env:
+  APP_PATH: "BigBrother"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: getQT
+      run: |
+        sudo apt-get install build-essential
+        
+    - name: buildSolution
+      run: |
+        cd ${{APP_PATH}}
+        mkdir build 
+        cd build
+        cmake ..
+        make
+      
+      
+      
+    
