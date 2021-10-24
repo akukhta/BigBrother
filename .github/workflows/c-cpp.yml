@@ -5,7 +5,7 @@ on:
     branches: [ main ]
     
 env:
-  APP_PATH: "./BigBrother/BigBrother"
+  APP_PATH: "BigBrother"
 
 jobs:
   build:
@@ -23,6 +23,7 @@ jobs:
       run: |
         ls
         cd ${{env.APP_PATH}}
+        ls
         mkdir build 
         cd build
         cmake ..
