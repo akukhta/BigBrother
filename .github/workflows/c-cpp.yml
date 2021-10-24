@@ -21,7 +21,7 @@ jobs:
         
     - name: buildSolution
       run: |
-        cd ${{APP_PATH}}
+        cd ${{env.APP_PATH}}
         mkdir build 
         cd build
         cmake ..
