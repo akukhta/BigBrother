@@ -30,6 +30,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 if (UNIX AND NOT APPLE)
 
     set(PROJECT_SOURCES
+            Net/AbstractPacket.h
             Common/main.cpp
             GUI/mainwindow.cpp
             GUI/mainwindow.h

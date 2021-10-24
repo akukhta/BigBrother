@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <bit>
 #include "TransportHeader.h"

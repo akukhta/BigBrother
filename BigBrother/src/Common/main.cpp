@@ -5,10 +5,6 @@
 #include "Common/analyzer.h"
 #include "Net/networklistenerfactory.h"
 #include "Linux/linuxdevicesmanager.h"
-#include "Net/EthernetIIHeader.h"
-#include "Net/IPv4Header.h"
-#include "Net/TCPHeader.h"
-#include "Net/UDPHeader.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,12 +30,13 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    std::cout << "Header2: " << sizeof(EnthernetIIHeader) << std::endl;
-    std::cout << "Align2: " << alignof(EnthernetIIHeader) << std::endl;
-    std::cout << "Header: " << sizeof(EthernetHeader) << std::endl;
-    std::cout << "IPv4 size:" << sizeof(IPv4Header) - sizeof(ProtocolHeader) << std::endl;
-    std::cout << "TCP size:" << sizeof(TCPHeader) - sizeof(TransportHeader) << std::endl;
-    std::cout << "UDP size:" << sizeof(UDPHeader) - sizeof(TransportHeader) << std::endl;
+//    std::cout << "Header2: " << sizeof(EnthernetIIHeader) << std::endl;
+//    std::cout << "Align2: " << alignof(EnthernetIIHeader) << std::endl;
+//    std::cout << "Header: " << sizeof(EthernetHeader) << std::endl;
+//    std::cout << "IPv4 size:" << sizeof(IPv4Header) - sizeof(ProtocolHeader) << std::endl;
+//    std::cout << "TCP size:" << sizeof(TCPHeader) - sizeof(TransportHeader) << std::endl;
+//    std::cout << "UDP size:" << sizeof(UDPHeader) - sizeof(TransportHeader) << std::endl;
+
     Analyzer analyzer(std::move(window), table, std::move(handler));
     return a.exec();
 }

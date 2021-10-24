@@ -1,8 +1,12 @@
 #pragma once
+#ifndef PACKETHANDLER
+#define PACKEDHANDLER
+
 #include <queue>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include "Net/AbstractPacket.h"
 
 class PacketHandler
 {
@@ -21,3 +25,5 @@ private:
     std::queue<std::vector<unsigned char>> packets;
     void handle();
 };
+
+#endif
