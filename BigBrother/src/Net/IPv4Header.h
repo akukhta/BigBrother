@@ -5,7 +5,7 @@
 #include "ProtocolHeader.h"
 #include "Common/utiles.h"
 
-enum class protocol: std::uint8_t
+enum protocol
 {
     TCP = 6,
     UDP = 17,
@@ -14,26 +14,6 @@ enum class protocol: std::uint8_t
 class IPv4Header final : public ProtocolHeader
 {
 public:
-
-    IPv4Header(std::vector<unsigned char> &buffer)
-    {
-        length = buffer[0] >> 4;
-        version = (buffer[0] << 4) >> 4;
-
-        DSCP = buffer[1] >> 2;
-        ECN = (buffer[1] << 6) >> 6;
-
-        buffer.erase(buffer.begin(), buffer.begin() + 2);
-
-        totalLength = takeFromBuffer<std::uint16_t>(buffer);
-        id = takeFromBuffer<std::uint16_t>(buffer);
-
-        {
-            std::uint16_t x = takeFromBuffer<std::uint16_t>(buffer);
-        }
-
-    };
-
     virtual void print() override final {;};
 private:
 
@@ -56,4 +36,5 @@ private:
     std::uint16_t checkSum;
     std::uint32_t sourceAddress;
     std::uint32_t destAddress;
+    friend class PacketHandler;
 };

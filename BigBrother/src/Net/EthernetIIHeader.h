@@ -26,5 +26,31 @@ public:
 private:
     unsigned char destAddress[addressSize], sourceAddress[addressSize];
     unsigned short typeLength;
+
+    type virtual getTypeID() override
+    {
+        switch (typeLength)
+        {
+            case type::ipv4:
+            {
+                return type::ipv4;
+            }
+
+            case type::ipv6:
+            {
+                return type::ipv6;
+            }
+
+            case type::ARP:
+            {
+                return type::ARP;
+            }
+
+            default:
+            {
+                return type::err;
+            }
+        }
+    }
 };
 
