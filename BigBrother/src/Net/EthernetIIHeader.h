@@ -21,7 +21,10 @@ public:
         }
     };
 
-    virtual void print() final override {;};
+    virtual void print() final override
+    {
+        ;
+    };
 
 private:
     unsigned char destAddress[addressSize], sourceAddress[addressSize];

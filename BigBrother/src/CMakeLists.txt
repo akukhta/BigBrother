@@ -61,6 +61,14 @@ if (UNIX AND NOT APPLE)
             Common/packethandler.h
             Common/packethandler.cpp
             Common/utiles.h
+            printerchooserwidget.h
+            printerchooserwidget.cpp
+            printerchooserwidget.ui
+            GUI/terminal.h
+            GUI/terminal.cpp
+            GUI/terminal.ui
+            Common/outputmanager.h
+            Common/outputmanager.cpp
         )
 endif(UNIX)
 

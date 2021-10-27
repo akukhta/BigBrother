@@ -3,6 +3,8 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include "lindeviceswidges.h"
+#include "printerchooserwidget.h"
+#include "terminal.h"
 
 //Main UI class
 QT_BEGIN_NAMESPACE
@@ -18,6 +20,8 @@ public:
     QTableWidget* getTable();
     ~MainWindow();
     LinDevicesWidges *wid;
+    PrinterChooserWidget *pChooserWidget;
+    Terminal *terminalWidget;
 
 private:
     Ui::MainWindow *ui;

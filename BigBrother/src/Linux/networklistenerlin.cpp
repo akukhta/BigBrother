@@ -48,7 +48,6 @@ void NetworkListenerLin::ScanNetwork()
         received = recvfrom(sockfd, buffer.data(), NetworkListenerLin::maxPacket, 0, NULL, NULL);
         if (received > 0)
         {
-            std::cout << std::this_thread::get_id() << "is running" << std::endl;
             handlerFunc(std::move(std::vector<unsigned char>(buffer.begin(), buffer.begin() + received)));
         }
     }

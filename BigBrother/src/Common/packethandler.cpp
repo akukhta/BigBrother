@@ -59,6 +59,8 @@ void PacketHandler::handle()
             }
         }
 
+        AbstractPacket aPacket(std::move(eHeader), std::move(pHeader), std::move(tHeader));
+        aPacket.print();
         packets.pop();
         lk.unlock();
     }
