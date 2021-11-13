@@ -16,14 +16,14 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(std::shared_ptr<Terminal> terminal, QWidget *parent = nullptr);
     QTableWidget* getTable();
     ~MainWindow();
     LinDevicesWidges *wid;
     PrinterChooserWidget *pChooserWidget;
-    Terminal *terminalWidget;
 
 private:
     Ui::MainWindow *ui;
+    std::shared_ptr<Terminal> terminal;
 };
 

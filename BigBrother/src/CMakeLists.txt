@@ -88,7 +88,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(BigBrother PRIVATE Qt${QT_VERSION_MAJOR}::Widgets pthread)
+target_link_libraries(BigBrother PRIVATE Qt${QT_VERSION_MAJOR}::Widgets pthread boost_unit_test_framework)
 
 set_target_properties(BigBrother PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

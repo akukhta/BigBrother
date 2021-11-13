@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>90</height>
+    <width>456</width>
+    <height>128</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,19 @@
     <widget class="QTextBrowser" name="textBrowser">
      <property name="font">
       <font>
-       <family>Ubuntu Mono</family>
+       <family>FreeSans</family>
        <pointsize>11</pointsize>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color : black;
 border-radius: 6px;</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
      </property>
     </widget>
    </item>

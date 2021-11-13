@@ -22,8 +22,21 @@ void PacketHandler::handle()
         std::unique_lock<std::mutex> lk(this->queueMutex);
         var.wait(lk, [this]() -> bool {return !packets.empty();});
         auto packet = packets.front();
+        out << packet.size() << std::endl;
+        std::string str(reinterpret_cast<char*>(packet.data()), packet.size());
+        terminal->printMessage(str);
 
-        unsigned short ethernetHeaderLength = getFromBuffer<unsigned short>(packet, 20);
+        unsigned short ethernetHeaderLength;
+
+        try
+        {
+            ethernetHeaderLength = getFromBuffer<unsigned short>(packet, 20);
+        }
+        catch (std::runtime_error const &err)
+        {
+            continue;
+        }
+
         std::unique_ptr<EthernetHeader> eHeader;
         std::unique_ptr<ProtocolHeader> pHeader;
         std::unique_ptr<TransportHeader> tHeader;
@@ -32,6 +45,11 @@ void PacketHandler::handle()
         if (ethernetHeaderLength <= 1518)
         {
             eHeader = std::make_unique<EnthernetIIHeader>(packet);
+        }
+
+        if (eHeader == nullptr)
+        {
+            continue;
         }
 
         switch (eHeader->getTypeID())

@@ -11,6 +11,11 @@
 template <typename T>
 T const getFromBuffer(std::vector<unsigned char> const & buffer, size_t offset = 0)
 {
+    if (offset >= buffer.size() || sizeof(T) + offset >= buffer.size())
+    {
+        throw std::runtime_error("");
+    }
+
     return *reinterpret_cast<T const *>(buffer.data() + offset);
 }
 
@@ -29,4 +34,5 @@ std::unique_ptr<T> getUniqueFromBuffer(std::vector<unsigned char> & buffer)
     buffer.erase(buffer.begin(), buffer.begin() + sizeof(T));
     return std::make_unique<T>(x);
 }
+
 
