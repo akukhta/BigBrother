@@ -13,7 +13,7 @@
 class PacketHandler
 {
 public:
-    PacketHandler(std::shared_ptr<Terminal> terminal = nullptr, std::shared_ptr<QT>)
+    PacketHandler(std::shared_ptr<Terminal> terminal = nullptr)
         : terminal(terminal)
     {
         out.open("sizes.txt");
