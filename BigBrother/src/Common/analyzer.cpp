@@ -20,7 +20,7 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
             ([this](std::unique_ptr<std::vector<NetworkDevice>> devices){startListening(std::move(devices));});
     this->window->wid->addStopCallbackFunction([this](){stopListening();});
 
-    this->table->addRow("Hello World!");
+    //this->table->addRow("Hello World!");
     this->handler->startHandling();
 }
 

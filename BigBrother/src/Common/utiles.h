@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <type_traits>
 
 template <typename T>
 T const getFromBuffer(std::vector<unsigned char> const & buffer, size_t offset = 0)
@@ -35,4 +36,18 @@ std::unique_ptr<T> getUniqueFromBuffer(std::vector<unsigned char> & buffer)
     return std::make_unique<T>(x);
 }
 
+template <class T, std::enable_if<std::is_same<T, std::uint32_t>::value>* = nullptr>
+std::string intToIP(std::uint32_t iIP)
+{
+    std::uint8_t *iIPp = reinterpret_cast<std::uint8_t*>(&iIP);
+    std::string ip = "";
 
+    for (size_t _ = 0; _ < sizeof(iIP); _++)
+    {
+        ip += std::to_string(*iIPp) + '.';
+        iIPp++;
+    }
+
+    ip.erase(ip.length() - 2, 1);
+    return ip;
+}

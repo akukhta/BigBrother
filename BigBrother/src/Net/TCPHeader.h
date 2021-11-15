@@ -52,4 +52,9 @@ private:
     std::uint16_t windowSize;
     std::uint16_t checkSum;
     std::uint16_t urgentPointer;
+
+    virtual std::string getTransportType() override
+    {
+        return "TCP";
+    }
 };

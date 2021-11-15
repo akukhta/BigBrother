@@ -15,6 +15,7 @@ class IPv4Header final : public ProtocolHeader
 {
 public:
     virtual void print() override final {;};
+
 private:
 
 #if defined(__ORDER_LITTLE_ENDIAN__)
@@ -36,5 +37,21 @@ private:
     std::uint16_t checkSum;
     std::uint32_t sourceAddress;
     std::uint32_t destAddress;
+
     friend class PacketHandler;
+
+    virtual std::string getProtocolType() override
+    {
+        return "IPv4";
+    }
+
+    virtual std::string getSourceIP() override
+    {
+        return intToIP<std::uint32_t>(sourceAddress);
+    }
+
+    virtual std::string getDestIP() override
+    {
+        return intToIP<std::uint32_t>(destAddress);
+    }
 };

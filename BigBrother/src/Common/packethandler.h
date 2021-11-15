@@ -7,14 +7,16 @@
 #include <mutex>
 
 #include <condition_variable>
+#include <memory>
+#include <functional>
+#include <fstream>
 #include "Net/AbstractPacket.h"
-#include "GUI/terminal.h"
 
 class PacketHandler
 {
 public:
-    PacketHandler(std::shared_ptr<Terminal> terminal = nullptr)
-        : terminal(terminal)
+    PacketHandler(std::function<void (void*)> callback = nullptr)
+        : callback(callback)
     {
         out.open("sizes.txt");
     };
@@ -28,7 +30,7 @@ private:
     std::mutex queueMutex;
     std::condition_variable var;
     std::queue<std::vector<unsigned char>> packets;
-    std::shared_ptr<Terminal> terminal;
+    std::function<void (void*)> callback;
     std::ofstream out;
     void handle();
 };

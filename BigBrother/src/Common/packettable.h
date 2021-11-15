@@ -10,10 +10,12 @@ class PacketTable
 {
 public:
     PacketTable(QTableWidget *table);
-    void addRow(AbstractPacket &&packet);
+    std::function<void (void*)> getPrintFunction();
+
 private:
     QTableWidget *table;
     std::mutex tableMutex;
     static const QStringList headers;
+    void addRow(void *packet);
 
 };

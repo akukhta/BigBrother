@@ -24,16 +24,18 @@ void PacketHandler::handle()
         auto packet = packets.front();
         out << packet.size() << std::endl;
         std::string str(reinterpret_cast<char*>(packet.data()), packet.size());
-        terminal->printMessage(str);
+        //terminal->printMessage(str);
 
         unsigned short ethernetHeaderLength;
 
         try
         {
-            ethernetHeaderLength = getFromBuffer<unsigned short>(packet, 20);
+            ethernetHeaderLength = getFromBuffer<unsigned short>(packet, 12);
         }
         catch (std::runtime_error const &err)
         {
+            packets.pop();
+            lk.unlock();
             continue;
         }
 
@@ -49,9 +51,12 @@ void PacketHandler::handle()
 
         if (eHeader == nullptr)
         {
+            packets.pop();
+            lk.unlock();
             continue;
         }
 
+        //Here is the problem. It uses cast to little-endian, need to avoid that.
         switch (eHeader->getTypeID())
         {
             case type::ipv4:
@@ -78,7 +83,7 @@ void PacketHandler::handle()
         }
 
         AbstractPacket aPacket(std::move(eHeader), std::move(pHeader), std::move(tHeader));
-        aPacket.print();
+        callback(&aPacket);
         packets.pop();
         lk.unlock();
     }

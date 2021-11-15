@@ -38,6 +38,41 @@ public:
             tHeader->print();
         }
     }
+
+    std::string getEthernetHeaderType()
+    {
+            return ethHeader != nullptr ? ethHeader->getType() : "";
+    };
+
+    std::string getSourceMAC()
+    {
+        return ethHeader != nullptr ?  ethHeader->getSourceMac() : "";
+    }
+
+    std::string getDestMAC()
+    {
+        return ethHeader != nullptr ? ethHeader->getDestMac() : "";
+    }
+
+    std::string getProtocolType()
+    {
+        return pHeader != nullptr ? pHeader->getProtocolType() : "";
+    }
+
+    std::string getTransportType()
+    {
+        return tHeader != nullptr ? tHeader->getTransportType() : "";
+    }
+
+    std::string getSourceIP()
+    {
+        return pHeader != nullptr ? pHeader->getSourceIP() : "";
+    }
+
+    std::string getDestIP()
+    {
+        return pHeader != nullptr ? pHeader->getDestIP() : "";
+    }
 };
 
 #endif

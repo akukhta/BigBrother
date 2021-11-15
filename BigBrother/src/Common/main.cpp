@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
 
     try
     {
-        terminal = std::make_shared<Terminal>();
+        //terminal = std::make_shared<Terminal>();
         window = std::make_unique<MainWindow>(terminal);
         table = std::make_shared<PacketTable>(window->getTable());
-        handler = std::make_unique<PacketHandler>(terminal);
+        handler = std::make_unique<PacketHandler>(table->getPrintFunction());
     }
 
     catch(std::runtime_error const &err)

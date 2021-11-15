@@ -12,4 +12,9 @@ private:
     std::uint16_t destenationPort;
     std::uint16_t lengthOfData;
     std::uint16_t checksum;
+
+    virtual std::string getTransportType() override
+    {
+        return "UDP";
+    }
 };

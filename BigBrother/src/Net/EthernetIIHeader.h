@@ -2,6 +2,8 @@
 #include <array>
 #include <vector>
 #include "EthernetHeader.h"
+#include "Common/utiles.h"
+
 #define addressSize 6
 
 class EnthernetIIHeader final: public EthernetHeader
@@ -54,6 +56,33 @@ private:
                 return type::err;
             }
         }
+    }
+
+    static std::string macToStr(unsigned char mac[addressSize] )
+    {
+        std::string resMac = "";
+
+        for (size_t i = 0; i < addressSize; i++)
+        {
+            resMac += mac[i];
+        }
+
+        return resMac;
+    }
+
+    virtual std::string getType() override
+    {
+        return "Enthernet II";
+    };
+
+    virtual std::string getSourceMac() override
+    {
+        return EnthernetIIHeader::macToStr(sourceAddress);
+    }
+
+    virtual std::string getDestMac() override
+    {
+        return EnthernetIIHeader::macToStr(destAddress);
     }
 };
 
