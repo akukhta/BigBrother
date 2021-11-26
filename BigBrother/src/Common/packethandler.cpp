@@ -56,12 +56,21 @@ void PacketHandler::handle()
             continue;
         }
 
+        auto eHeaderType = eHeader->getTypeID();
+
         //Here is the problem. It uses cast to little-endian, need to avoid that.
         switch (eHeader->getTypeID())
         {
             case type::ipv4:
             {
+                //Compare bytes and returned IPv4!
                 pHeader = getUniqueFromBuffer<IPv4Header>(packet);
+
+                if (pHeader == nullptr)
+                {
+                    int a = rand();
+                    a++;
+                }
 
                 switch (dynamic_cast<IPv4Header*>(pHeader.get())->protocol)
                 {
@@ -79,6 +88,13 @@ void PacketHandler::handle()
                 }
 
                 break;
+            }
+
+            case type::ipv6:
+            {
+                int aaa;
+                aaa = rand();
+                aaa++;
             }
         }
 

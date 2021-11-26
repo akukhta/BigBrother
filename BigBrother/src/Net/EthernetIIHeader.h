@@ -18,7 +18,8 @@ public:
                 sourceAddress[i] = buffer[i + addressSize];
             }
 
-            typeLength = *reinterpret_cast<unsigned short*>(std::vector<unsigned char>(buffer.data() + addressSize * 2, buffer.data() + addressSize * 2 + sizeof(unsigned short)).data());
+            typeLength = getFromBuffer<unsigned short>(buffer, std::endian::big, addressSize * 2);
+//            typeLength = *reinterpret_cast<unsigned short*>(std::vector<unsigned char>(buffer.data() + addressSize * 2, buffer.data() + addressSize * 2 + sizeof(unsigned short)).data());
             buffer.erase(buffer.begin(), buffer.begin() + sizeof(EnthernetIIHeader) - sizeof(EthernetHeader));
         }
     };
