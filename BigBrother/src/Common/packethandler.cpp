@@ -30,7 +30,7 @@ void PacketHandler::handle()
 
         try
         {
-            ethernetHeaderLength = getFromBuffer<unsigned short>(packet, 12);
+            ethernetHeaderLength = getFromBuffer<unsigned short>(packet, std::endian::big, 12);
         }
         catch (std::runtime_error const &err)
         {
@@ -44,7 +44,7 @@ void PacketHandler::handle()
         std::unique_ptr<TransportHeader> tHeader;
         std::uint8_t ethernetHeaderType;
 
-        if (ethernetHeaderLength <= 1518)
+        if (ethernetHeaderLength >= ethernetHeaderTypeMinVal)
         {
             eHeader = std::make_unique<EnthernetIIHeader>(packet);
         }

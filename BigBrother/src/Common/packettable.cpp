@@ -6,7 +6,8 @@ const QStringList PacketTable::headers{"Ethernet frame", "Protocol type", "Trans
 PacketTable::PacketTable(QTableWidget *table) : table(table)
 {
     table->setColumnCount(7);
-    table->setVerticalHeaderLabels(PacketTable::headers);
+    table->setHorizontalHeaderLabels(PacketTable::headers);
+    table->setRowCount(0);
 }
 
 std::function<void (void*)> PacketTable::getPrintFunction()
@@ -19,11 +20,10 @@ std::function<void (void*)> PacketTable::getPrintFunction()
 
 void PacketTable::addRow(void *packet)
 {
-    //std::unique_lock<std::mutex> lk(tableMutex);
+    std::unique_lock<std::mutex> lk(tableMutex);
     size_t rowCount = table->rowCount();
     AbstractPacket *_packet = reinterpret_cast<AbstractPacket*>(packet);
-    table->setRowCount(rowCount + 1);
-    table->insertRow(rowCount);
+    table->insertRow(table->rowCount());
     table->setItem(rowCount, 0, new QTableWidgetItem(QString::fromStdString(_packet->getEthernetHeaderType())));
     table->setItem(rowCount, 1, new QTableWidgetItem(QString::fromStdString(_packet->getProtocolType())));
     table->setItem(rowCount, 2, new QTableWidgetItem(QString::fromStdString(_packet->getTransportType())));

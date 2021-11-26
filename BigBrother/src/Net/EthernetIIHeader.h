@@ -5,7 +5,7 @@
 #include "Common/utiles.h"
 
 #define addressSize 6
-
+#define ethernetHeaderTypeMinVal 1536
 class EnthernetIIHeader final: public EthernetHeader
 {
 public:
@@ -18,7 +18,7 @@ public:
                 sourceAddress[i] = buffer[i + addressSize];
             }
 
-            typeLength = *reinterpret_cast<unsigned short*>(buffer.data() + addressSize * 2, buffer.data() + addressSize * 2 + sizeof(unsigned short));
+            typeLength = *reinterpret_cast<unsigned short*>(std::vector<unsigned char>(buffer.data() + addressSize * 2, buffer.data() + addressSize * 2 + sizeof(unsigned short)).data());
             buffer.erase(buffer.begin(), buffer.begin() + sizeof(EnthernetIIHeader) - sizeof(EthernetHeader));
         }
     };
@@ -60,14 +60,18 @@ private:
 
     static std::string macToStr(unsigned char mac[addressSize] )
     {
-        std::string resMac = "";
+        std::stringstream ss;
+        ss << std::hex;
 
         for (size_t i = 0; i < addressSize; i++)
         {
-            resMac += mac[i];
+            ss << std::to_string(mac[i]) << ":";
         }
 
-        return resMac;
+        auto res = ss.str();
+        res.erase(res.end() - 1, res.end());
+
+        return res;
     }
 
     virtual std::string getType() override

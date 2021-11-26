@@ -8,16 +8,27 @@
 #include <sstream>
 #include <iomanip>
 #include <type_traits>
+#include <bit>
 
 template <typename T>
-T const getFromBuffer(std::vector<unsigned char> const & buffer, size_t offset = 0)
+T const getFromBuffer(std::vector<unsigned char> const & buffer, std::endian castEndianness = std::endian::big,
+    size_t offset = 0)
 {
     if (offset >= buffer.size() || sizeof(T) + offset >= buffer.size())
     {
         throw std::runtime_error("");
     }
 
-    return *reinterpret_cast<T const *>(buffer.data() + offset);
+    if (std::endian::native == castEndianness)
+    {
+        return *reinterpret_cast<T const *>(buffer.data() + offset);
+    }
+    else
+    {
+        std::vector<unsigned char> tmp(buffer.data() + offset, buffer.data() + offset + sizeof(T));
+        std::reverse(tmp.begin(), tmp.end());
+        return *reinterpret_cast<T const *>(tmp.data());
+    }
 }
 
 template <typename T>
