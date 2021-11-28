@@ -9,6 +9,13 @@
 #include <iomanip>
 #include <type_traits>
 #include <bit>
+#include <unordered_map>
+#include "Net/EthernetHeader.h"
+#include "Net/ProtocolHeader.h"
+#include "Net/TransportHeader.h"
+
+//When we construct a header from vector of chars, we should fill buffer by zero vptrSize times!
+const size_t vptrSize = sizeof(void*);
 
 template <typename T>
 T const getFromBuffer(std::vector<unsigned char> const & buffer, std::endian castEndianness = std::endian::big,
@@ -39,11 +46,34 @@ T takeFromBuffer(std::vector<unsigned char> & buffer)
     return res;
 }
 
-template <class T>
+//Todo: add a table with sizes of all fields to make revert in case if we have little endian
+template <class T, std::enable_if<std::is_base_of<T, EthernetHeader>::value || std::is_base_of<T, ProtocolHeader>::value ||
+    std::is_base_of<T, TransportHeader>::value>* = nullptr>
 std::unique_ptr<T> getUniqueFromBuffer(std::vector<unsigned char> & buffer)
 {
-    T x = *reinterpret_cast<T*>(buffer.data());
-    buffer.erase(buffer.begin(), buffer.begin() + sizeof(T));
+    //The Map contatins pairs of "hash of type, pointer to vptr"
+    //We have to put this ptr manually in case if we construct a header from buffer
+    static std::unordered_map<size_t, std::vector<unsigned char>> vptrsTable;
+
+    if (vptrsTable.find(typeid(T).hash_code()) == vptrsTable.end())
+    {
+        T tmp;
+        unsigned char *tmpPtr = reinterpret_cast<unsigned char*>(&tmp);
+        std::vector<unsigned char> vptr;
+
+        for (size_t i = 0; i < vptrSize; i++)
+        {
+            vptr.push_back(tmpPtr[i]);
+        }
+
+        vptrsTable.insert(std::make_pair(typeid(T).hash_code(), std::move(vptr)));
+    }
+
+    std::vector<unsigned char> subVec(buffer.data(), buffer.data() + sizeof(T) - vptrSize);
+    for (size_t i = 0; i < vptrSize; i++)
+        subVec.insert(subVec.begin(), vptrsTable.at(typeid(T).hash_code())[vptrSize - 1 - i]);
+    T x = *reinterpret_cast<T*>(subVec.data());
+    buffer.erase(buffer.begin(), buffer.begin() + sizeof(T) - vptrSize);
     return std::make_unique<T>(x);
 }
 
