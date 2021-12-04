@@ -13,9 +13,14 @@
 #include "Net/EthernetHeader.h"
 #include "Net/ProtocolHeader.h"
 #include "Net/TransportHeader.h"
+#include "Common/littleendianparser.h"
 
 //When we construct a header from vector of chars, we should fill buffer by zero vptrSize times!
-const size_t vptrSize = sizeof(void*);
+static const size_t vptrSize = sizeof(void*);
+
+//The Map contatins pairs of "hash of type, pointer to vptr"
+//We have to put this ptr manually in case if we construct a header from buffer
+static std::unordered_map<size_t, std::vector<unsigned char>> vptrsTable;
 
 template <typename T>
 T const getFromBuffer(std::vector<unsigned char> const & buffer, std::endian castEndianness = std::endian::big,
@@ -51,10 +56,6 @@ template <class T, std::enable_if<std::is_base_of<T, EthernetHeader>::value || s
     std::is_base_of<T, TransportHeader>::value>* = nullptr>
 std::unique_ptr<T> getUniqueFromBuffer(std::vector<unsigned char> & buffer)
 {
-    //The Map contatins pairs of "hash of type, pointer to vptr"
-    //We have to put this ptr manually in case if we construct a header from buffer
-    static std::unordered_map<size_t, std::vector<unsigned char>> vptrsTable;
-
     if (vptrsTable.find(typeid(T).hash_code()) == vptrsTable.end())
     {
         T tmp;
@@ -70,8 +71,14 @@ std::unique_ptr<T> getUniqueFromBuffer(std::vector<unsigned char> & buffer)
     }
 
     std::vector<unsigned char> subVec(buffer.data(), buffer.data() + sizeof(T) - vptrSize);
-    for (size_t i = 0; i < vptrSize; i++)
-        subVec.insert(subVec.begin(), vptrsTable.at(typeid(T).hash_code())[vptrSize - 1 - i]);
+
+#ifdef LITTLE_ENDIAN
+    LittleEndianParser::getInstance();
+#endif
+
+    std::copy(vptrsTable.at(typeid(T).hash_code()).begin(), vptrsTable.at(typeid(T).hash_code()).end(),
+              std::insert_iterator(subVec, subVec.begin()));
+
     T x = *reinterpret_cast<T*>(subVec.data());
     buffer.erase(buffer.begin(), buffer.begin() + sizeof(T) - vptrSize);
     return std::make_unique<T>(x);

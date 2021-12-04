@@ -70,6 +70,7 @@ if (UNIX AND NOT APPLE)
             GUI/terminal.ui
             Common/outputmanager.h
             Common/outputmanager.cpp
+            Common/littleendianparser.h
         )
 endif(UNIX)
 
