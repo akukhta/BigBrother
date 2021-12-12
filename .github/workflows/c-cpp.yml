@@ -17,9 +17,7 @@ jobs:
     
     - name: getQT
       run: |
-        sudo apt-get install build-essential --fix-missing
-        sudo apt-get install libqwt-qt5-dev --fix-missing
-        sudo apt-get install qtbase5-dev --fix-missing
+        sudo apt-get install qtbase5-dev
     
     - name: Install boost test framework
       run: |
