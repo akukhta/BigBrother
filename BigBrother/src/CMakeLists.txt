@@ -68,6 +68,9 @@ if (UNIX AND NOT APPLE)
             GUI/terminal.h
             GUI/terminal.cpp
             GUI/terminal.ui
+            GUI/viewsettingsdialog.h
+            GUI/viewsettingsdialog.cpp
+            GUI/viewsettingsdialog.ui
             Common/outputmanager.h
             Common/outputmanager.cpp
             Common/littleendianparser.h

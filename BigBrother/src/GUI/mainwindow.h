@@ -5,6 +5,7 @@
 #include "lindeviceswidges.h"
 #include "printerchooserwidget.h"
 #include "terminal.h"
+#include "viewsettingsdialog.h"
 
 //Main UI class
 QT_BEGIN_NAMESPACE
@@ -22,8 +23,12 @@ public:
     LinDevicesWidges *wid;
     PrinterChooserWidget *pChooserWidget;
 
+private slots:
+    void on_actionView_settings_triggered();
+
 private:
     Ui::MainWindow *ui;
     std::shared_ptr<Terminal> terminal;
+    std::unique_ptr<ViewSettingsDialog> viewSettingDialog;
 };
 

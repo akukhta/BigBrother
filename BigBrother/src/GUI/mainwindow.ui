@@ -43,8 +43,21 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionView_settings"/>
+   </widget>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionView_settings">
+   <property name="text">
+    <string>View settings</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
