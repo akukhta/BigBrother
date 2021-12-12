@@ -5,6 +5,10 @@
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include "Net/IPv4Header.h"
+#include "Net/IPv6Header.h"
+#include "Net/TCPHeader.h"
+#include "Net/UDPHeader.h"
 
 class LittleEndianParser : public std::enable_shared_from_this<LittleEndianParser>
 {
@@ -12,42 +16,36 @@ public:
 
     static std::shared_ptr<LittleEndianParser> getInstance()
     {
-        if (instance == nullptr)
-        {
-            instance = std::make_shared<LittleEndianParser>();
-        }
-
+        static std::shared_ptr<LittleEndianParser> instance(new LittleEndianParser);
         return instance;
     };
 
-    std::vector<unsigned short> getMap(unsigned short key)
+    template <class T>
+    std::vector<unsigned short> getMap()
     {
-        return reversingMap.at(key);
+        return reversingMap.at(typeid(T).hash_code());
     }
 
 private:
     LittleEndianParser()
     {
         //IPv4 map
-        reversingMap.insert(std::make_pair(0,
+        reversingMap.insert(std::make_pair(typeid(IPv4Header).hash_code(),
             std::vector<unsigned short>({1, 1, 2, 2, 2, 1, 1, 2, 4, 4})));
 
         //IPv6 map
-        reversingMap.insert(std::make_pair(1,
+        reversingMap.insert(std::make_pair(typeid(IPv6Header).hash_code(),
             std::vector<unsigned short>({1, 1, 2, 2, 1, 1, 4, 4})));
 
         //TCP map
-        reversingMap.insert(std::make_pair(2,
+        reversingMap.insert(std::make_pair(typeid(TCPHeader).hash_code(),
             std::vector<unsigned short>({2, 2, 4, 4, 2, 2, 2, 2})));
 
         //UDP map
-        reversingMap.insert(std::make_pair(3,
+        reversingMap.insert(std::make_pair(typeid(UDPHeader).hash_code(),
             std::vector<unsigned short>({2, 2, 2, 2})));
     };
 
-    static std::shared_ptr<LittleEndianParser> instance;
-    std::unordered_map<unsigned short, std::vector<unsigned short>> reversingMap;
+    std::unordered_map<size_t, std::vector<unsigned short>> reversingMap;
 };
-
-std::shared_ptr<LittleEndianParser> LittleEndianParser::instance = nullptr;
 //#endif

@@ -71,6 +71,7 @@ if (UNIX AND NOT APPLE)
             Common/outputmanager.h
             Common/outputmanager.cpp
             Common/littleendianparser.h
+            Common/StringUtiles.h
         )
 endif(UNIX)
 

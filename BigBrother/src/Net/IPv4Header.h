@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 #include "ProtocolHeader.h"
-#include "Common/utiles.h"
+#include "Common/StringUtiles.h"
 
 enum protocol
 {
@@ -57,11 +57,11 @@ private:
 
     virtual std::string getSourceIP() override
     {
-        return intToIP<std::uint32_t>(sourceAddress);
+        return intToIP(sourceAddress);
     }
 
     virtual std::string getDestIP() override
     {
-        return intToIP<std::uint32_t>(destAddress);
+        return intToIP(destAddress);
     }
 };

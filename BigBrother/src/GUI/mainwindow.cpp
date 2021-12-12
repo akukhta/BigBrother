@@ -12,7 +12,6 @@ MainWindow::MainWindow(std::shared_ptr<Terminal> terminal, QWidget *parent)
     _layout->addWidget(wid);
     _layout->addWidget(pChooserWidget);
     ui->frame->setLayout(_layout);
-
 }
 
 QTableWidget* MainWindow::getTable()
