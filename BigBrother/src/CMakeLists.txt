@@ -71,10 +71,14 @@ if (UNIX AND NOT APPLE)
             GUI/viewsettingsdialog.h
             GUI/viewsettingsdialog.cpp
             GUI/viewsettingsdialog.ui
+            GUI/packetviewer.ui
+            GUI/packetviewer.h
+            GUI/packetviewer.cpp
             Common/outputmanager.h
             Common/outputmanager.cpp
             Common/littleendianparser.h
             Common/StringUtiles.h
+            Common/ViewSettings.h
         )
 endif(UNIX)
 

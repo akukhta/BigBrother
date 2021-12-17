@@ -2,16 +2,14 @@
 #include <QMessageBox>
 #include "./ui_mainwindow.h"
 
-MainWindow::MainWindow(std::shared_ptr<Terminal> terminal, QWidget *parent)
-    : terminal(terminal), QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     wid = new LinDevicesWidges();
-    pChooserWidget = new PrinterChooserWidget();
     auto _layout = new QVBoxLayout();
     _layout->addWidget(wid);
-    _layout->addWidget(pChooserWidget);
+    _layout->addWidget(new PacketViewer());
     ui->frame->setLayout(_layout);
     viewSettingDialog = std::make_unique<ViewSettingsDialog>();
 }

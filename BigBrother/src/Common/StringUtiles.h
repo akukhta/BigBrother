@@ -3,6 +3,9 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include "Common/ViewSettings.h"
+
+static size_t const addressLength = 16;
 
 std::string inline intToIP(std::uint32_t iIP)
 {
@@ -26,14 +29,23 @@ std::string inline intToIP(std::uint32_t iIP)
     ip.erase(ip.length() - 1, 1);
 
     return ip;
-//    std::vector<unsigned char> buf(&iIP);
-//    std::string ip = "";
+}
 
-//    for (auto x = buf.rbegin(); x != buf.rend(); x++)
-//    {
-//        ip += std::to_string(*x) + '.';
-//    }
+std::string inline getIPv6IP(unsigned char addres[addressLength])
+{
+    std::string res = "";
+    unsigned char index = 0;
+    std::for_each_n(addres, addressLength, [&](auto x) {
+        res += std::to_string(x);
+        index++;
 
-//    ip.erase(ip.length() - 1, 1);
-//    return ip;
+        if (index % 2 == 0)
+        {
+            index = 0;
+            res += ":";
+        }
+    });
+
+    res.erase(res.length() - 1, 1);
+    return res;
 }

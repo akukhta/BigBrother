@@ -63,14 +63,7 @@ void PacketHandler::handle()
         {
             case type::ipv4:
             {
-                //Compare bytes and returned IPv4!
                 pHeader = getUniqueFromBuffer<IPv4Header>(packet);
-
-                if (pHeader == nullptr)
-                {
-                    int a = rand();
-                    a++;
-                }
 
                 switch (dynamic_cast<IPv4Header*>(pHeader.get())->protocol)
                 {
@@ -92,9 +85,13 @@ void PacketHandler::handle()
 
             case type::ipv6:
             {
-                int aaa;
-                aaa = rand();
-                aaa++;
+                pHeader = getUniqueFromBuffer<IPv6Header>(packet);
+
+                #ifdef __BIG_ENDIAN__
+                pHeader->transform();
+                #endif
+
+                break;
             }
         }
 

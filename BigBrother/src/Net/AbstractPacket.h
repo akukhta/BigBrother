@@ -41,7 +41,7 @@ public:
 
     std::string getEthernetHeaderType()
     {
-            return ethHeader != nullptr ? ethHeader->getType() : "";
+        return ethHeader != nullptr ? ethHeader->getType() : "";
     };
 
     std::string getSourceMAC()
@@ -72,6 +72,16 @@ public:
     std::string getDestIP()
     {
         return pHeader != nullptr ? pHeader->getDestIP() : "";
+    }
+
+    std::string getSourcePort()
+    {
+        return tHeader != nullptr ? tHeader->getSourcePort() : "";
+    }
+
+    std::string getDestPort()
+    {
+        return tHeader != nullptr ? tHeader->getDestPort() : "";
     }
 };
 

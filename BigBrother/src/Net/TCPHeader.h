@@ -57,4 +57,14 @@ private:
     {
         return "TCP";
     }
+
+    virtual std::string getSourcePort() override
+    {
+        return std::to_string(sourcePort);
+    }
+
+    virtual std::string getDestPort() override
+    {
+        return std::to_string(destinationPort);
+    }
 };

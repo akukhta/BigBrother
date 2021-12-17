@@ -35,7 +35,7 @@ private:
 
         //IPv6 map
         reversingMap.insert(std::make_pair(typeid(IPv6Header).hash_code(),
-            std::vector<unsigned short>({1, 1, 2, 2, 1, 1, 4, 4})));
+            std::vector<unsigned short>({1, 1, 2, 2, 1, 1, 16, 16})));
 
         //TCP map
         reversingMap.insert(std::make_pair(typeid(TCPHeader).hash_code(),

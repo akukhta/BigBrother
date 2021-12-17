@@ -12,12 +12,10 @@ int main(int argc, char *argv[])
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
     std::unique_ptr<PacketHandler> handler;
-    std::shared_ptr<Terminal> terminal;
 
     try
     {
-        //terminal = std::make_shared<Terminal>();
-        window = std::make_unique<MainWindow>(terminal);
+        window = std::make_unique<MainWindow>();
         table = std::make_shared<PacketTable>(window->getTable());
         handler = std::make_unique<PacketHandler>(table->getPrintFunction());
     }

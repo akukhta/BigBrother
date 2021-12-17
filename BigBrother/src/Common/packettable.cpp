@@ -1,11 +1,11 @@
 #include "packettable.h"
 
 const QStringList PacketTable::headers{"Ethernet frame", "Protocol type", "Transport type",
-    "Source MAC", "Destination MAC", "Source IP", "Destination IP"};
+    "Source MAC", "Destination MAC", "Source IP", "Destination IP", "Source port", "Destination port"};
 
 PacketTable::PacketTable(QTableWidget *table) : table(table)
 {
-    table->setColumnCount(7);
+    table->setColumnCount(9);
     table->setHorizontalHeaderLabels(PacketTable::headers);
     table->setRowCount(0);
 }
@@ -31,4 +31,6 @@ void PacketTable::addRow(void *packet)
     table->setItem(rowCount, 4, new QTableWidgetItem(QString::fromStdString(_packet->getDestMAC())));
     table->setItem(rowCount, 5, new QTableWidgetItem(QString::fromStdString(_packet->getSourceIP())));
     table->setItem(rowCount, 6, new QTableWidgetItem(QString::fromStdString(_packet->getDestIP())));
+    table->setItem(rowCount, 7, new QTableWidgetItem(QString::fromStdString(_packet->getSourcePort())));
+    table->setItem(rowCount, 8, new QTableWidgetItem(QString::fromStdString(_packet->getDestPort())));
 }
