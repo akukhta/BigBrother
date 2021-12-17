@@ -1,5 +1,5 @@
 # BigBrother
-BigBrother is a simple sniffer programm. 
+BigBrother is a simple sniffer program. 
 <br/>
 Analyzes packets which are going through network card. 
 
