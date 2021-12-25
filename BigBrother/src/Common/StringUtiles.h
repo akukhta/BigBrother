@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include "Common/ViewSettings.h"
+//#include "Common/ViewSettings.h"
 
 static size_t const addressLength = 16;
 

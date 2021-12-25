@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Big Brother</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -49,6 +49,7 @@
     </property>
     <addaction name="separator"/>
     <addaction name="actionView_settings"/>
+    <addaction name="actionMemory_usage"/>
    </widget>
    <addaction name="menuSettings"/>
   </widget>
@@ -56,6 +57,11 @@
   <action name="actionView_settings">
    <property name="text">
     <string>View settings</string>
+   </property>
+  </action>
+  <action name="actionMemory_usage">
+   <property name="text">
+    <string>Memory usage</string>
    </property>
   </action>
  </widget>

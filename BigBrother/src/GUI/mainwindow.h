@@ -5,6 +5,7 @@
 #include "lindeviceswidges.h"
 #include "viewsettingsdialog.h"
 #include "packetviewer.h"
+#include "memoryusagedialog.h"
 
 //Main UI class
 QT_BEGIN_NAMESPACE
@@ -25,8 +26,11 @@ public:
 private slots:
     void on_actionView_settings_triggered();
 
+    void on_actionMemory_usage_triggered();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<ViewSettingsDialog> viewSettingDialog;
+    std::unique_ptr<MemoryUsageDialog> memoryDialog;
 };
 

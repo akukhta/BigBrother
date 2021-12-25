@@ -11,6 +11,7 @@ ViewSettingsDialog::ViewSettingsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(columnsCount);
+    auto _settings = Settings::getInstance();
 
     for (size_t i = 0; i < settings.length(); i++)
     {
@@ -19,6 +20,9 @@ ViewSettingsDialog::ViewSettingsDialog(QWidget *parent) :
         ui->tableWidget->setCellWidget(i, 1, new QComboBox);
         static_cast<QComboBox *>(ui->tableWidget->cellWidget(i, 1))->addItems(values);
     }
+
+    static_cast<QComboBox *>(ui->tableWidget->cellWidget(0, 1))->setCurrentIndex(_settings->getMacType() == Settings::viewType::HEX ? 0 : 1);
+    static_cast<QComboBox *>(ui->tableWidget->cellWidget(1, 1))->setCurrentIndex(_settings->getIPType() == Settings::viewType::HEX ? 0 : 1);
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
@@ -30,6 +34,9 @@ ViewSettingsDialog::~ViewSettingsDialog()
 
 void ViewSettingsDialog::on_pushButton_clicked()
 {
+    auto settings = Settings::getInstance();
+    settings->setMacType(static_cast<QComboBox *>(ui->tableWidget->cellWidget(0, 1))->currentIndex() == 0 ? Settings::viewType::HEX : Settings::viewType::DEC);
+    settings->setIPType(static_cast<QComboBox *>(ui->tableWidget->cellWidget(1, 1))->currentIndex() == 0 ? Settings::viewType::HEX : Settings::viewType::DEC);
     close();
 }
 

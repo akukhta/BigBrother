@@ -1,43 +1,48 @@
 #pragma once
 
 #include <memory>
+#include <QSettings>
+#include <filesystem>
 #include "GUI/viewsettingsdialog.h"
+#include "GUI/memoryusagedialog.h"
 
-class ViewSettings : public std::enable_shared_from_this<ViewSettings>
+class Settings : public std::enable_shared_from_this<Settings>
 {
 public:
-    std::shared_ptr<ViewSettings> getInstance()
+    std::shared_ptr<Settings> static getInstance()
     {
-        static std::shared_ptr<ViewSettings> instance(new ViewSettings());
+        static std::shared_ptr<Settings> instance(new Settings());
         return instance;
     }
 
     enum class viewType : bool { HEX, DEC };
 
+    ~Settings();
+
 private:
     friend class ViewSettingsDialog;
+    friend class MemoryUsageDialog;
 
-    ViewSettings() = default;
+    static std::string const settingsFilePath;
+    static QStringList const tags;
 
-    viewType mac, ip;
+    Settings();
 
-    viewType getMacType()
-    {
-        return mac;
-    }
+    std::unique_ptr<QSettings> sttngs;
 
-    viewType getIPType()
-    {
-        return ip;
-    }
+    viewType getMacType();
 
-    void setMacType(viewType type)
-    {
-        mac = type;
-    }
+    viewType getIPType();
 
-    void setIPType(viewType type)
-    {
-        ip = type;
-    }
+    size_t getMaxDumpSize();
+
+    size_t getSizeType();
+
+    void setMacType(viewType type);
+
+    void setIPType(viewType type);
+
+    void setMaxDumpSize(size_t size);
+
+    void setSizeType(size_t type);
 };

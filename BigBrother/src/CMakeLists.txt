@@ -74,11 +74,15 @@ if (UNIX AND NOT APPLE)
             GUI/packetviewer.ui
             GUI/packetviewer.h
             GUI/packetviewer.cpp
+            GUI/memoryusagedialog.ui
+            GUI/memoryusagedialog.h
+            GUI/memoryusagedialog.cpp
             Common/outputmanager.h
             Common/outputmanager.cpp
             Common/littleendianparser.h
             Common/StringUtiles.h
             Common/ViewSettings.h
+            Common/settings.cpp
         )
 endif(UNIX)
 

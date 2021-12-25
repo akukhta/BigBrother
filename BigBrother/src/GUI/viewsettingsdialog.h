@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QComboBox>
+#include "Common/ViewSettings.h"
 
 namespace Ui {
 class ViewSettingsDialog;
