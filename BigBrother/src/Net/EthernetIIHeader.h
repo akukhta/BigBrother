@@ -61,12 +61,20 @@ private:
 
     static std::string macToStr(unsigned char mac[addressSize] )
     {
+        auto isHex = Settings::getInstance()->getMacType() == Settings::viewType::HEX;
+
         std::stringstream ss;
-        ss << std::hex;
 
         for (size_t i = 0; i < addressSize; i++)
         {
-            ss << std::to_string(mac[i]) << ":";
+            if (isHex)
+            {
+                ss << std::hex << static_cast<int>(mac[i]) << ":";
+            }
+            else
+            {
+                ss << std::to_string(mac[i]) << ":";
+            }
         }
 
         auto res = ss.str();

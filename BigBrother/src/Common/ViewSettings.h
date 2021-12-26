@@ -17,6 +17,12 @@ public:
 
     enum class viewType : bool { HEX, DEC };
 
+    viewType getMacType();
+    viewType getIPType();
+
+    size_t getMaxDumpSize();
+    size_t getSizeType();
+
     ~Settings();
 
 private:
@@ -30,19 +36,9 @@ private:
 
     std::unique_ptr<QSettings> sttngs;
 
-    viewType getMacType();
-
-    viewType getIPType();
-
-    size_t getMaxDumpSize();
-
-    size_t getSizeType();
-
     void setMacType(viewType type);
-
     void setIPType(viewType type);
 
     void setMaxDumpSize(size_t size);
-
     void setSizeType(size_t type);
 };

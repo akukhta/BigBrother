@@ -3,11 +3,13 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-//#include "Common/ViewSettings.h"
+#include "Common/ViewSettings.h"
+
+//Todo: add port and other lines to hex or dec converting
 
 static size_t const addressLength = 16;
 
-std::string inline intToIP(std::uint32_t iIP)
+std::string inline intToIPDec(std::uint32_t iIP)
 {
     std::vector<std::string> octets;
     std::string ip = "";
@@ -29,6 +31,32 @@ std::string inline intToIP(std::uint32_t iIP)
     ip.erase(ip.length() - 1, 1);
 
     return ip;
+}
+
+std::string inline intToIPHex(std::uint32_t iIP)
+{
+    std::stringstream ss;
+    ss << std::hex;
+    std::uint8_t *it = reinterpret_cast<uint8_t*>(&iIP);
+    std::string res;
+
+    for (size_t i = 0; i < sizeof(iIP); i++)
+    {
+        ss << std::hex << static_cast<int>(it[i]) << ":";
+        auto tmpStr = ss.str();
+
+        res.insert(res.begin(), tmpStr.begin(), tmpStr.end());
+        ss.str("");
+    }
+
+    res.erase(res.end() - 1, res.end());
+
+    return res;
+}
+
+std::string inline intToIP(std::uint32_t iIP)
+{
+    return Settings::getInstance()->getIPType() == Settings::viewType::DEC ? intToIPDec(iIP) : intToIPHex(iIP);
 }
 
 std::string inline getIPv6IP(unsigned char addres[addressLength])
