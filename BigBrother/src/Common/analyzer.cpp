@@ -6,8 +6,8 @@
 #endif
 
 
-Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<PacketHandler> handler)
-    : window(std::move(window)), table(std::move(table)), handler(std::move(handler))
+Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<PacketHandler> handler, std::unique_ptr<PacketsStorage> storage)
+    : window(std::move(window)), table(std::move(table)), handler(std::move(handler)), storage(std::move(storage))
 {
 
     if (!this->window || !this->table)
@@ -20,7 +20,6 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
             ([this](std::unique_ptr<std::vector<NetworkDevice>> devices){startListening(std::move(devices));});
     this->window->wid->addStopCallbackFunction([this](){stopListening();});
 
-    //this->table->addRow("Hello World!");
     this->handler->startHandling();
 }
 

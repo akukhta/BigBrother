@@ -24,7 +24,6 @@ void PacketHandler::handle()
         auto packet = packets.front();
         out << packet.size() << std::endl;
         std::string str(reinterpret_cast<char*>(packet.data()), packet.size());
-        //terminal->printMessage(str);
 
         unsigned short ethernetHeaderLength;
 

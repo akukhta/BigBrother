@@ -14,29 +14,34 @@ private:
     std::unique_ptr<EthernetHeader> ethHeader;
     std::unique_ptr<ProtocolHeader> pHeader;
     std::unique_ptr<TransportHeader> tHeader;
+    std::vector<unsigned char> data;
 
 public:
     AbstractPacket(std::unique_ptr<EthernetHeader> eHeader,
-        std::unique_ptr<ProtocolHeader> pHeader, std::unique_ptr<TransportHeader> tHeader)
+        std::unique_ptr<ProtocolHeader> pHeader, std::unique_ptr<TransportHeader> tHeader, std::vector<unsigned char> &&data = std::vector<unsigned char>())
         : ethHeader(std::move(eHeader)), pHeader(std::move(pHeader)),
-          tHeader(std::move(tHeader)) {;};
+          tHeader(std::move(tHeader)), data(data) {;};
 
-    void print()
+    std::string getInfo()
     {
-        if (ethHeader)
-        {
-            ethHeader->print();
-        }
+        std::string result = "";
+
+//        if (ethHeader)
+//        {
+//            ethHeader->print();
+//        }
 
         if (pHeader)
         {
-            pHeader->print();
+            result += pHeader->getInfo();
         }
 
-        if (tHeader)
-        {
-            tHeader->print();
-        }
+//        if (tHeader)
+//        {
+//            tHeader->print();
+//        }
+
+        return result;
     }
 
     std::string getEthernetHeaderType()

@@ -5,7 +5,7 @@
 
 class ProtocolHeader{
 public:
-    virtual void print() = 0;
+    virtual std::string getInfo() = 0;
 protected:
     friend class PacketHandler;
     friend class AbstractPacket;

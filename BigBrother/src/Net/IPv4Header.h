@@ -14,7 +14,30 @@ enum protocol
 class IPv4Header final : public ProtocolHeader
 {
 public:
-    virtual void print() override final {;};
+    virtual std::string getInfo() override final
+    {
+        static std::stringstream result;
+
+        if (result.str() == "")
+        {
+            result << "IPv4 Header's info:" << std::endl;
+            result << "Length: " << length << std::endl;
+            result << "Version: " << version << std::endl;
+            result << "DSCP: " << DSCP << std::endl;
+            result << "ECN: " << ECN << std::endl;
+            result << "Total length: " << totalLength << std::endl;
+            result << "ID: " << id << std::endl;
+            result << "flags: " << flags << std::endl;
+            result << "offset: " << offset << std::endl;
+            result << "ttl: " << ttl << std::endl;
+            result << "protocol: " << protocol << std::endl;
+            result << "checksum: " << checkSum << std::endl;
+            result << "source address: " << sourceAddress << std::endl;
+            result << "destination address: " << destAddress << std::endl;
+        }
+
+        return result.str();
+     };
 
 private:
 

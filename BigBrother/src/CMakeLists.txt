@@ -83,6 +83,8 @@ if (UNIX AND NOT APPLE)
             Common/StringUtiles.h
             Common/ViewSettings.h
             Common/settings.cpp
+            Common/packetsstorage.h
+            Common/packetsstorage.cpp
         )
 endif(UNIX)
 
