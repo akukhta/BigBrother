@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <vector>
 #include <memory>
+#include <cmath>
 #include "Common/ViewSettings.h"
 #include "Net/AbstractPacket.h"
 
