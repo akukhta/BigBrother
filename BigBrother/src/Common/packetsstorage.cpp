@@ -25,13 +25,6 @@ PacketsStorage::PacketsStorage()
     {
         throw std::runtime_error("File mapping error");
     }
-
-    data[0] = 0xaa;
-    data[1] = 0xbb;
-    data[2] = 0xcc;
-    data[3] = 0xdd;
-    data[4] = 0xee;
-    data[5] = 0xff;
 }
 
 PacketsStorage::~PacketsStorage()
@@ -51,7 +44,21 @@ size_t PacketsStorage::getSizeInBytes(size_t format, size_t size)
     return size * pow(1024, format);
 }
 
-std::unique_ptr<AbstractPacket> PacketsStorage::getPacketByIndex(size_t index)
+void PacketsStorage::save(const std::vector<unsigned char> &packetsData, size_t indx)
 {
-    return nullptr;
+//    if (memUsed + packetsData.size() > maxSize)
+//    {
+//        memUsed = 0;
+//        packetsOffset.clear();
+//    }
+
+//    packetsOffset.insert(std::make_pair(indx, std::make_pair(memUsed, memUsed + packetsData.size())));
+//    std::copy(data + memUsed, data + memUsed + packetsData.size(), packetsData.begin());
+}
+
+std::vector<unsigned char> PacketsStorage::getDataByIndex(size_t index)
+{
+    auto offset = packetsOffset.find(index);
+
+    return offset == packetsOffset.end() ? std::vector<unsigned char>() : std::vector<unsigned char>(data + offset->second.first, data + (offset->second.first + offset->second.second));
 }

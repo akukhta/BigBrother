@@ -38,3 +38,9 @@ void MainWindow::on_actionMemory_usage_triggered()
     memoryDialog->exec();
 }
 
+
+void MainWindow::on_tableWidget_clicked(const QModelIndex &index)
+{
+    ;
+}
+

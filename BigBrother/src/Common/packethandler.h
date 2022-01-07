@@ -11,12 +11,13 @@
 #include <functional>
 #include <fstream>
 #include "Net/AbstractPacket.h"
+#include "Common/packetsstorage.h"
 
 class PacketHandler
 {
 public:
-    PacketHandler(std::function<void (void*)> callback = nullptr)
-        : callback(callback)
+    PacketHandler(std::function<void (void*)> callback = nullptr, std::shared_ptr<PacketsStorage> storage = nullptr)
+        : callback(callback), storage(storage)
     {
         out.open("sizes.txt");
     };
@@ -32,6 +33,7 @@ private:
     std::queue<std::vector<unsigned char>> packets;
     std::function<void (void*)> callback;
     std::ofstream out;
+    std::shared_ptr<PacketsStorage> storage;
     void handle();
 };
 

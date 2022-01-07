@@ -13,14 +13,14 @@ int main(int argc, char *argv[])
     std::unique_ptr<MainWindow> window;
     std::shared_ptr<PacketTable> table;
     std::unique_ptr<PacketHandler> handler;
-    std::unique_ptr<PacketsStorage> storage;
+    std::shared_ptr<PacketsStorage> storage;
 
     try
     {
         window = std::make_unique<MainWindow>();
         table = std::make_shared<PacketTable>(window->getTable());
-        handler = std::make_unique<PacketHandler>(table->getPrintFunction());
-        storage = std::make_unique<PacketsStorage>();
+        storage = std::make_shared<PacketsStorage>();
+        handler = std::make_unique<PacketHandler>(table->getPrintFunction(), storage);
     }
 
     catch(std::runtime_error const &err)

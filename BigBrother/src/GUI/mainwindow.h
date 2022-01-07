@@ -28,6 +28,8 @@ private slots:
 
     void on_actionMemory_usage_triggered();
 
+    void on_tableWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<ViewSettingsDialog> viewSettingDialog;

@@ -8,6 +8,7 @@ PacketTable::PacketTable(QTableWidget *table) : table(table)
     table->setColumnCount(9);
     table->setHorizontalHeaderLabels(PacketTable::headers);
     table->setRowCount(0);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
 std::function<void (void*)> PacketTable::getPrintFunction()
