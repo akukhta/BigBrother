@@ -1,5 +1,5 @@
 #pragma once
-#include "Common/packethandler.h"
+#include <string>
 
 enum type
 {
@@ -15,16 +15,9 @@ class EthernetHeader
 {
 public:
     virtual void print() = 0;
-
-protected:
-    friend class PacketHandler;
-    friend class AbstractPacket;
-
     virtual std::string getType() = 0;
     virtual std::string getSourceMac() = 0;
     virtual std::string getDestMac() = 0;
-
-private:
     type virtual getTypeID() = 0;
 };
 

@@ -21,7 +21,8 @@ public:
     QTableWidget* getTable();
     ~MainWindow();
     LinDevicesWidges *wid;
-
+    void setTableCallback(std::function<void(size_t)> callback);
+    std::function<void(std::string const&)> getPrintFunction();
 
 private slots:
     void on_actionView_settings_triggered();
@@ -34,5 +35,7 @@ private:
     Ui::MainWindow *ui;
     std::unique_ptr<ViewSettingsDialog> viewSettingDialog;
     std::unique_ptr<MemoryUsageDialog> memoryDialog;
+    std::function<void (size_t)> tableCallback;
+    std::function<void (std::string const&)> printerFunction;
 };
 

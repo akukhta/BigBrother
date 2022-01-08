@@ -44,16 +44,31 @@ size_t PacketsStorage::getSizeInBytes(size_t format, size_t size)
     return size * pow(1024, format);
 }
 
-void PacketsStorage::save(const std::vector<unsigned char> &packetsData, size_t indx)
+void PacketsStorage::save(const std::vector<unsigned char> &packetsData)
 {
-//    if (memUsed + packetsData.size() > maxSize)
-//    {
-//        memUsed = 0;
-//        packetsOffset.clear();
-//    }
+    if (memUsed + packetsData.size() > maxSize)
+    {
+        memUsed = 0;
+        packetsOffset.clear();
+        packets.clear();
+    }
 
-//    packetsOffset.insert(std::make_pair(indx, std::make_pair(memUsed, memUsed + packetsData.size())));
-//    std::copy(data + memUsed, data + memUsed + packetsData.size(), packetsData.begin());
+    packetsOffset.insert(std::make_pair(currentPacket, std::make_pair(memUsed, memUsed + packetsData.size())));
+    std::copy(packetsData.begin(), packetsData.end(), data + memUsed);
+    memUsed += packetsData.size();
+}
+
+void PacketsStorage::addPacket(std::unique_ptr<AbstractPacket> & packet, std::vector<unsigned char> const &packetsData)
+{
+    packets.insert(std::make_pair(currentPacket, std::move(packet)));
+    save(packetsData);
+    currentPacket++;
+}
+
+const AbstractPacket *PacketsStorage::getPacketByIndex(size_t index)
+{
+    auto packet = packets.find(index);
+    return packet != packets.end() ? packet->second.get() : nullptr;
 }
 
 std::vector<unsigned char> PacketsStorage::getDataByIndex(size_t index)

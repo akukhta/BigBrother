@@ -32,7 +32,6 @@ public:
         return result.str();
     }
 
-private:
    using u128 = unsigned char[_addressLength];
 
    std::uint32_t version : 4;

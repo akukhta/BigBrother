@@ -39,8 +39,6 @@ public:
         return result.str();
      };
 
-private:
-
 #ifdef LITTLE_ENDIAN
     std::uint8_t length : 4;
     std::uint8_t version : 4;
@@ -70,8 +68,6 @@ private:
     std::uint16_t checkSum;
     std::uint32_t sourceAddress;
     std::uint32_t destAddress;
-
-    friend class PacketHandler;
 
     virtual std::string getProtocolType() override
     {

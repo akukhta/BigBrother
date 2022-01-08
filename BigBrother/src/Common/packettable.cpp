@@ -3,7 +3,7 @@
 const QStringList PacketTable::headers{"Ethernet frame", "Protocol type", "Transport type",
     "Source MAC", "Destination MAC", "Source IP", "Destination IP", "Source port", "Destination port"};
 
-PacketTable::PacketTable(QTableWidget *table) : table(table)
+PacketTable::PacketTable(QTableWidget *table, std::shared_ptr<PacketsStorage> packetsStorage) : table(table) , packetsStorage(packetsStorage)
 {
     table->setColumnCount(9);
     table->setHorizontalHeaderLabels(PacketTable::headers);
@@ -17,6 +17,17 @@ std::function<void (void*)> PacketTable::getPrintFunction()
         addRow(p);
     };
     return r;
+}
+
+void PacketTable::clicked(size_t indx)
+{
+    AbstractPacket const * packet = packetsStorage->getPacketByIndex(indx);
+    printerFunction(packet ? packet->getInfo() : "The packed has been deleted");
+}
+
+void PacketTable::setPrintFunction(std::function<void (const std::string &)> func)
+{
+    printerFunction = func;
 }
 
 void PacketTable::addRow(void *packet)

@@ -22,7 +22,7 @@ public:
         : ethHeader(std::move(eHeader)), pHeader(std::move(pHeader)),
           tHeader(std::move(tHeader)), data(data) {;};
 
-    std::string getInfo()
+    std::string getInfo() const
     {
         std::string result = "";
 

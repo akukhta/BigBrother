@@ -94,9 +94,10 @@ void PacketHandler::handle()
             }
         }
 
-        AbstractPacket aPacket(std::move(eHeader), std::move(pHeader), std::move(tHeader));
-        callback(&aPacket);
+        std::unique_ptr<AbstractPacket> aPacket = std::make_unique<AbstractPacket>(std::move(eHeader), std::move(pHeader), std::move(tHeader));
         packets.pop();
         lk.unlock();
+        callback(aPacket.get());
+        storage->addPacket(aPacket, packet);
     }
 }

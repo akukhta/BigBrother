@@ -8,7 +8,7 @@ class TCPHeader final : public TransportHeader
 {
 public:
     virtual void print() override final {;};
-private:
+
     std::uint16_t sourcePort;
     std::uint16_t destinationPort;
     std::uint32_t sequenceNumber;
