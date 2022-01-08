@@ -14,20 +14,17 @@ class IPv6Header : public ProtocolHeader
 public:
     virtual std::string getInfo() override
     {
-        static std::stringstream result;
+        std::stringstream result;
 
-        if (result.str() == "")
-        {
-            result << "IPv6 Header's info:" << std::endl;
-            result << "Version: " << version << std::endl;
-            result << "Trafic class: " << traficClass << std::endl;
-            result << "Flow label: " << flowLabel << std::endl;
-            result << "Payload length: " << payloadLength << std::endl;
-            result << "Next header: " << nextHeader << std::endl;
-            result << "Hop limit: " << hopLimit << std::endl;
-            result << "Source address: " << getSourceIP() << std::endl;
-            result << "Destination address: " << getDestIP() << std::endl;
-        }
+        result << "IPv6 Header's info:" << std::endl;
+        result << "Version: " << version << std::endl;
+        result << "Trafic class: " << traficClass << std::endl;
+        result << "Flow label: " << flowLabel << std::endl;
+        result << "Payload length: " << payloadLength << std::endl;
+        result << "Next header: " << nextHeader << std::endl;
+        result << "Hop limit: " << hopLimit << std::endl;
+        result << "Source address: " << getSourceIP() << std::endl;
+        result << "Destination address: " << getDestIP() << std::endl;
 
         return result.str();
     }
