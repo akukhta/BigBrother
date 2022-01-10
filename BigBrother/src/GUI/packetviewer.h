@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::PacketViewer *ui;
+    static QString intToHex(int num, short countOfZeroes = 1);
 };
 
 #endif // PACKETVIEWER_H
