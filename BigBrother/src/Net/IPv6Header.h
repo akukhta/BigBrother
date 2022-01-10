@@ -17,12 +17,12 @@ public:
         std::stringstream result;
 
         result << "IPv6 Header's info:" << std::endl;
-        result << "Version: " << version << std::endl;
-        result << "Trafic class: " << traficClass << std::endl;
-        result << "Flow label: " << flowLabel << std::endl;
-        result << "Payload length: " << payloadLength << std::endl;
-        result << "Next header: " << nextHeader << std::endl;
-        result << "Hop limit: " << hopLimit << std::endl;
+        result << "Version: " << static_cast<int>(version)<< std::endl;
+        result << "Trafic class: " << static_cast<int>(traficClass) << std::endl;
+        result << "Flow label: " << static_cast<int>(flowLabel) << std::endl;
+        result << "Payload length: " << static_cast<int>(payloadLength) << std::endl;
+        result << "Next header: " << static_cast<int>(nextHeader) << std::endl;
+        result << "Hop limit: " << static_cast<int>(hopLimit) << std::endl;
         result << "Source address: " << getSourceIP() << std::endl;
         result << "Destination address: " << getDestIP() << std::endl;
 
@@ -51,17 +51,17 @@ public:
    }
 #endif
 
-   virtual std::string getProtocolType() override
+   virtual std::string getProtocolType() override final
    {
        return "IPv6";
    }
 
-   virtual std::string getSourceIP() override
+   virtual std::string getSourceIP() override final
    {
        return getIPv6IP(sourceAddress);
    }
 
-   virtual std::string getDestIP() override
+   virtual std::string getDestIP() override final
    {
        return getIPv6IP(destinationAddress);
    }

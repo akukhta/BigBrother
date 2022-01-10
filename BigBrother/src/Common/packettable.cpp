@@ -9,6 +9,7 @@ PacketTable::PacketTable(QTableWidget *table, std::shared_ptr<PacketsStorage> pa
     table->setHorizontalHeaderLabels(PacketTable::headers);
     table->setRowCount(0);
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 std::function<void (void*)> PacketTable::getPrintFunction()

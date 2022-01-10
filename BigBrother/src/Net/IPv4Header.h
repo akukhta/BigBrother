@@ -19,19 +19,19 @@ public:
         std::stringstream result;
 
         result << "IPv4 Header's info:" << std::endl;
-        result << "Length: " << length << std::endl;
-        result << "Version: " << version << std::endl;
-        result << "DSCP: " << DSCP << std::endl;
-        result << "ECN: " << ECN << std::endl;
-        result << "Total length: " << totalLength << std::endl;
-        result << "ID: " << id << std::endl;
-        result << "flags: " << flags << std::endl;
-        result << "offset: " << offset << std::endl;
-        result << "ttl: " << ttl << std::endl;
-        result << "protocol: " << protocol << std::endl;
-        result << "checksum: " << checkSum << std::endl;
-        result << "source address: " << sourceAddress << std::endl;
-        result << "destination address: " << destAddress << std::endl;
+        result << "Length: " << static_cast<int>(length) << std::endl;
+        result << "Version: " << static_cast<int>(version) << std::endl;
+        result << "DSCP: " << static_cast<int>(DSCP) << std::endl;
+        result << "ECN: " << static_cast<int>(ECN)<< std::endl;
+        result << "Total length: " << static_cast<int>(totalLength) << std::endl;
+        result << "ID: " << static_cast<int>(id) << std::endl;
+        result << "flags: " << static_cast<int>(flags) << std::endl;
+        result << "offset: " << static_cast<int>(offset) << std::endl;
+        result << "ttl: " << static_cast<int>(ttl) << std::endl;
+        result << "protocol: " << static_cast<int>(protocol) << std::endl;
+        result << "checksum: " << static_cast<int>(checkSum) << std::endl;
+        result << "source address: " << getSourceIP() << std::endl;
+        result << "destination address: " << getDestIP() << std::endl;
 
         return result.str();
      };
@@ -66,17 +66,17 @@ public:
     std::uint32_t sourceAddress;
     std::uint32_t destAddress;
 
-    virtual std::string getProtocolType() override
+    virtual std::string getProtocolType() override final
     {
         return "IPv4";
     }
 
-    virtual std::string getSourceIP() override
+    virtual std::string getSourceIP() override final
     {
         return intToIP(sourceAddress);
     }
 
-    virtual std::string getDestIP() override
+    virtual std::string getDestIP() override final
     {
         return intToIP(destAddress);
     }

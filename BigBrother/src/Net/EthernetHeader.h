@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 
 enum type
 {
@@ -18,6 +19,7 @@ public:
     virtual std::string getType() = 0;
     virtual std::string getSourceMac() = 0;
     virtual std::string getDestMac() = 0;
+    virtual std::string getInfo() = 0;
     type virtual getTypeID() = 0;
 };
 

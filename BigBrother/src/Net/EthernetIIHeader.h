@@ -81,19 +81,30 @@ public:
         return res;
     }
 
-    virtual std::string getType() override
+    virtual std::string getType() override final
     {
         return "Enthernet II";
     };
 
-    virtual std::string getSourceMac() override
+    virtual std::string getSourceMac() override final
     {
         return EnthernetIIHeader::macToStr(sourceAddress);
     }
 
-    virtual std::string getDestMac() override
+    virtual std::string getDestMac() override final
     {
         return EnthernetIIHeader::macToStr(destAddress);
+    }
+
+    virtual std::string getInfo() override final
+    {
+        std::stringstream sstream;
+        sstream << "Ethernet II header's info: " << std::endl;
+        sstream << "Destination MAC: " << getDestMac() << std::endl;
+        sstream << "Source MAC: " << getSourceMac() << std::endl;
+        sstream << "EtherType: " << static_cast<int>(typeLength) << std::endl;
+
+        return sstream.str();
     }
 };
 

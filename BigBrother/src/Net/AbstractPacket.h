@@ -26,20 +26,20 @@ public:
     {
         std::string result = "";
 
-//        if (ethHeader)
-//        {
-//            ethHeader->print();
-//        }
+        if (ethHeader)
+        {
+            result += ethHeader->getInfo();
+        }
 
         if (pHeader)
         {
             result += pHeader->getInfo();
         }
 
-//        if (tHeader)
-//        {
-//            tHeader->print();
-//        }
+        if (tHeader)
+        {
+            result += tHeader->getInfo();
+        }
 
         return result;
     }
