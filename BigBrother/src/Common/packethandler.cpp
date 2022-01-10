@@ -7,6 +7,12 @@ void PacketHandler::startHandling()
     t.detach();
 }
 
+void PacketHandler::stopHandling()
+{
+    isRunning.store(false);
+    var.notify_all();
+}
+
 void PacketHandler::addToQueue(std::vector<unsigned char> packet)
 {
     queueMutex.lock();
@@ -17,12 +23,17 @@ void PacketHandler::addToQueue(std::vector<unsigned char> packet)
 
 void PacketHandler::handle()
 {
-    while(true)
+    while(isRunning.load())
     {
         std::unique_lock<std::mutex> lk(this->queueMutex);
-        var.wait(lk, [this]() -> bool {return !packets.empty();});
+        var.wait(lk, [this]() -> bool {return !packets.empty() || !isRunning.load();});
+
+        if (!isRunning.load())
+        {
+            break;
+        }
+
         auto packet = packets.front();
-        out << packet.size() << std::endl;
         std::string str(reinterpret_cast<char*>(packet.data()), packet.size());
 
         unsigned short ethernetHeaderLength;

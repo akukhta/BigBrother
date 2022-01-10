@@ -46,5 +46,6 @@ int main(int argc, char *argv[])
     //             + sizeof(EnthernetIIHeader) + sizeof(TCPHeader) + sizeof(IPv4Header) << std::endl;
 
     Analyzer analyzer(std::move(window), table, std::move(handler), std::move(storage));
+    analyzer.start();
     return a.exec();
 }

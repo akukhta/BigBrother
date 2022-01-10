@@ -15,10 +15,24 @@ Analyzer::Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTab
         throw std::runtime_error("Can not own UI objects!");
     }
 
-    this->window->show();
     this->window->wid->addCallbackFunction
             ([this](std::unique_ptr<std::vector<NetworkDevice>> devices){startListening(std::move(devices));});
+
     this->window->wid->addStopCallbackFunction([this](){stopListening();});
+
+    this->window->setExitCallback(std::bind(&Analyzer::stop, this));
+
+}
+
+void Analyzer::stop()
+{
+    stopListening();
+    handler->stopHandling();
+}
+
+void Analyzer::start()
+{
+    this->window->show();
 
     this->handler->startHandling();
 }

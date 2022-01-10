@@ -33,6 +33,11 @@ void MainWindow::setTableCallback(std::function<void (size_t)> callback)
     tableCallback = callback;
 }
 
+void MainWindow::setExitCallback(std::function<void ()> callback)
+{
+    exitCallback = callback;
+}
+
 std::function<void (const std::string &)> MainWindow::getPrintFunction()
 {
     return printerFunction;
@@ -53,8 +58,11 @@ void MainWindow::on_actionMemory_usage_triggered()
 
 void MainWindow::on_tableWidget_clicked(const QModelIndex &index)
 {
-    auto r = index.row();
-    r++;
     tableCallback(index.row());
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+        exitCallback();
 }
 

@@ -34,6 +34,7 @@ private:
     std::function<void (void*)> callback;
     std::ofstream out;
     std::shared_ptr<PacketsStorage> storage;
+    std::atomic_bool isRunning = true;
     void handle();
 };
 

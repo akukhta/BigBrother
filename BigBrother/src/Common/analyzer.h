@@ -13,6 +13,8 @@ class Analyzer
 {
 public:
     Analyzer(std::unique_ptr<MainWindow> window, std::shared_ptr<PacketTable> const &table, std::unique_ptr<PacketHandler> handler, std::shared_ptr<PacketsStorage> storage);
+    void stop();
+    void start();
 
 private:
     std::unique_ptr<MainWindow> window;
