@@ -13,7 +13,7 @@ class PacketViewer : public QDialog
 
 public:
     explicit PacketViewer(QWidget *parent = nullptr);
-    void printPacket(std::string const &data);
+    void printPacket(std::string const &packet, std::vector<unsigned char> const &data);
     ~PacketViewer();
 
 private:

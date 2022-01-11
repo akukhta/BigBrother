@@ -13,7 +13,7 @@ public:
     PacketTable(QTableWidget *table, std::shared_ptr<PacketsStorage> packetsStorage = nullptr);
     std::function<void (void*)> getPrintFunction();
     void clicked(size_t indx);
-    void setPrintFunction(std::function<void(std::string const &)> func);
+    void setPrintFunction(std::function<void(std::string const &, std::vector<unsigned char> const &)> func);
 
 private:
     QTableWidget *table;
@@ -21,5 +21,5 @@ private:
     static const QStringList headers;
     void addRow(void *packet);
     std::shared_ptr<PacketsStorage> packetsStorage;
-    std::function<void(std::string const &)> printerFunction;
+    std::function<void(std::string const &, std::vector<unsigned char> const &)> printerFunction;
 };

@@ -24,7 +24,7 @@ public:
     LinDevicesWidges *wid;
     void setTableCallback(std::function<void(size_t)> callback);
     void setExitCallback(std::function<void (void)> callback);
-    std::function<void(std::string const&)> getPrintFunction();
+    std::function<void(std::string const&, std::vector<unsigned char> const &)> getPrintFunction();
 
 
 private slots:
@@ -39,7 +39,7 @@ private:
     std::unique_ptr<ViewSettingsDialog> viewSettingDialog;
     std::unique_ptr<MemoryUsageDialog> memoryDialog;
     std::function<void (size_t)> tableCallback;
-    std::function<void (std::string const&)> printerFunction;
+    std::function<void (std::string const&, std::vector<unsigned char> const &)> printerFunction;
     std::function<void (void)> exitCallback;
     void closeEvent(QCloseEvent *event);
 };

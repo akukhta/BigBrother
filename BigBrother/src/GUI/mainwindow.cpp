@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     wid->setFixedSize(200, 150);
     _layout->addWidget(wid);
     PacketViewer *viewer = new PacketViewer();
-    printerFunction = std::bind(&PacketViewer::printPacket, viewer, std::placeholders::_1);
+    printerFunction = std::bind(&PacketViewer::printPacket, viewer, std::placeholders::_1, std::placeholders::_2);
     _layout->addWidget(viewer);
     ui->frame->setLayout(_layout);
     viewSettingDialog = std::make_unique<ViewSettingsDialog>();
@@ -38,7 +38,7 @@ void MainWindow::setExitCallback(std::function<void ()> callback)
     exitCallback = callback;
 }
 
-std::function<void (const std::string &)> MainWindow::getPrintFunction()
+std::function<void (const std::string &, std::vector<unsigned char> const &)> MainWindow::getPrintFunction()
 {
     return printerFunction;
 }

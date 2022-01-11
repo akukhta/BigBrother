@@ -23,10 +23,10 @@ std::function<void (void*)> PacketTable::getPrintFunction()
 void PacketTable::clicked(size_t indx)
 {
     AbstractPacket const * packet = packetsStorage->getPacketByIndex(indx);
-    printerFunction(packet ? packet->getInfo() : "The packed has been deleted");
+    printerFunction(packet ? packet->getInfo() : "The packed has been deleted", packetsStorage->getDataByIndex(indx));
 }
 
-void PacketTable::setPrintFunction(std::function<void (const std::string &)> func)
+void PacketTable::setPrintFunction(std::function<void (const std::string &, std::vector<unsigned char> const &)> func)
 {
     printerFunction = func;
 }
