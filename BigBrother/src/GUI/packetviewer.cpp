@@ -7,12 +7,12 @@ PacketViewer::PacketViewer(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    ui->tableWidget->setColumnCount(9);
+    ui->tableWidget->setColumnCount(17);
     ui->tableWidget->resizeColumnsToContents();
 
     QStringList vLabels;
 
-    for (size_t i = 1; i <= 8; i++)
+    for (size_t i = 0; i < 16; i++)
     {
         vLabels.push_back(intToHex(i));
     }
@@ -26,34 +26,41 @@ void PacketViewer::printPacket(const std::string &packet, std::vector<unsigned c
 {
     ui->textBrowser->clear();
     ui->textBrowser->append(QString::fromStdString(packet));
-    ui->tableWidget->clear();
     ui->tableWidget->setRowCount(0);
+    vLabels.clear();
 
-    size_t elementsCount = 0;
-
-    for(size_t i = 0; i < data.size(); i++)
+    for(size_t i = 0; i < ceil(static_cast<double>(data.size()) / 16); i++)
     {
-        if (elementsCount == 0)
+        ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+        QString textView = "";
+
+        for (size_t j = 0; j < 16; j++)
         {
-            ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+            if (i * 16 + j < data.size())
+            {
+                ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, j, new QTableWidgetItem(intToHex(static_cast<int>(data[i * 16 + j]), 0)));
+
+                if (data[i * 16 + j] > 31 && data[i * 16 + j] < 127)
+                {
+                    textView.push_back(static_cast<char>(data[i * 16 + j]));
+                }
+                else
+                {
+                    textView.push_back('.');
+                }
+            }
+            else
+            {
+                ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, j, new QTableWidgetItem(intToHex(0, 0)));
+                textView.push_back('.');
+            }
         }
 
-        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, i % 8, new QTableWidgetItem(intToHex(static_cast<int>(data[i]), 0)));
-        elementsCount++;
-
-        if (elementsCount == 8)
-        {
-            elementsCount = 0;
-        }
+        ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, 16, new QTableWidgetItem(textView));
+        vLabels.append(intToHex(i));
     }
 
-    if (data.size() % 8)
-    {
-        for (size_t i = (data.size() % 8) - 1; i < 8; i++)
-        {
-            ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, i, new QTableWidgetItem(intToHex(0, 0)));
-        }
-    }
+    ui->tableWidget->setVerticalHeaderLabels(vLabels);
 }
 
 PacketViewer::~PacketViewer()
@@ -70,7 +77,9 @@ QString PacketViewer::intToHex(int num, short countOfZeroes)
         res += '0';
     }
 
-    QString tmp = QString::number(num);
+    std::stringstream ss;
+    ss << std::hex << num;
+    auto tmp = ss.str();
 
     if (countOfZeroes > 0)
     {
@@ -83,7 +92,7 @@ QString PacketViewer::intToHex(int num, short countOfZeroes)
     {
         for (size_t i = 0; i < tmp.length(); i++)
         {
-            res += tmp[i];
+            res.push_back(tmp[i]);
         }
     }
 

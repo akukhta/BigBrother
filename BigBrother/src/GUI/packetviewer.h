@@ -2,6 +2,7 @@
 #define PACKETVIEWER_H
 
 #include <QDialog>
+#include <sstream>
 
 namespace Ui {
 class PacketViewer;
@@ -18,7 +19,8 @@ public:
 
 private:
     Ui::PacketViewer *ui;
-    static QString intToHex(int num, short countOfZeroes = 1);
+    static QString intToHex(int num, short countOfZeroes = 1);\
+    QStringList vLabels;
 };
 
 #endif // PACKETVIEWER_H

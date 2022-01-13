@@ -75,5 +75,5 @@ std::vector<unsigned char> PacketsStorage::getDataByIndex(size_t index)
 {
     auto offset = packetsOffset.find(index);
 
-    return offset == packetsOffset.end() ? std::vector<unsigned char>() : std::vector<unsigned char>(data + offset->second.first, data + (offset->second.first + offset->second.second));
+    return offset == packetsOffset.end() ? std::vector<unsigned char>() : std::vector<unsigned char>(data + offset->second.first, data + offset->second.first + offset->second.second - offset->second.first);
 }
