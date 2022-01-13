@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <sstream>
+#include <math.h>
 
 namespace Ui {
 class PacketViewer;
