@@ -23,6 +23,7 @@ public:
     std::vector<unsigned char> getDataByIndex(size_t index);
     void addPacket(std::unique_ptr<AbstractPacket> & packet, std::vector<unsigned char> const &packetsData);
     AbstractPacket const * getPacketByIndex(size_t index);
+    void clear();
 
 private:
     //Key value structure which stores "Packet's index" - "Packet's offset in binary file", "Data length"

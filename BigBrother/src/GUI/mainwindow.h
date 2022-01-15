@@ -24,6 +24,7 @@ public:
     LinDevicesWidges *wid;
     void setTableCallback(std::function<void(size_t)> callback);
     void setExitCallback(std::function<void (void)> callback);
+    void setClearTableCallback(std::function<void (void)> callback);
     std::function<void(std::string const&, std::vector<unsigned char> const &)> getPrintFunction();
 
 
@@ -34,6 +35,8 @@ private slots:
 
     void on_tableWidget_clicked(const QModelIndex &index);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<ViewSettingsDialog> viewSettingDialog;
@@ -41,6 +44,7 @@ private:
     std::function<void (size_t)> tableCallback;
     std::function<void (std::string const&, std::vector<unsigned char> const &)> printerFunction;
     std::function<void (void)> exitCallback;
+    std::function<void (void)> clearTableCallback;
     void closeEvent(QCloseEvent *event);
 };
 

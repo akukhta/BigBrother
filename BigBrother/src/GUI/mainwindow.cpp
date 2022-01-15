@@ -38,6 +38,11 @@ void MainWindow::setExitCallback(std::function<void ()> callback)
     exitCallback = callback;
 }
 
+void MainWindow::setClearTableCallback(std::function<void ()> callback)
+{
+    clearTableCallback = callback;
+}
+
 std::function<void (const std::string &, std::vector<unsigned char> const &)> MainWindow::getPrintFunction()
 {
     return printerFunction;
@@ -64,5 +69,12 @@ void MainWindow::on_tableWidget_clicked(const QModelIndex &index)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
         exitCallback();
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->tableWidget->setRowCount(0);
+    clearTableCallback();
 }
 

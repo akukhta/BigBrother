@@ -71,6 +71,14 @@ const AbstractPacket *PacketsStorage::getPacketByIndex(size_t index)
     return packet != packets.end() ? packet->second.get() : nullptr;
 }
 
+void PacketsStorage::clear()
+{
+    packets.clear();
+    packetsOffset.clear();
+    memUsed = 0;
+    currentPacket = 0;
+}
+
 std::vector<unsigned char> PacketsStorage::getDataByIndex(size_t index)
 {
     auto offset = packetsOffset.find(index);

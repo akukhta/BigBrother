@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         table = std::make_shared<PacketTable>(window->getTable(), storage);
         table->setPrintFunction(window->getPrintFunction());
         window->setTableCallback(std::bind(&PacketTable::clicked, table, std::placeholders::_1));
+        window->setClearTableCallback(std::bind(&PacketsStorage::clear, storage));
         handler = std::make_unique<PacketHandler>(table->getPrintFunction(), storage);
     }
 
