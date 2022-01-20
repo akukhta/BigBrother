@@ -3,7 +3,8 @@ name: C/C++ CI
 on:
   push:
     branches: 
-    - "**"
+    - main
+    - Windows
     
 env:
   APP_PATH: "BigBrother/src"
