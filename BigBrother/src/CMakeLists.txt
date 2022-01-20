@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(BigBrother VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_PREFIX_PATH "C:\\Qt\\5.9.9\\msvc2017_64\\")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -87,6 +88,74 @@ if (UNIX AND NOT APPLE)
             Common/packetsstorage.cpp
         )
 endif(UNIX)
+
+if (WIN32)
+
+    include (TestBigEndian)
+    TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+
+    if(IS_BIG_ENDIAN)
+         add_definitions(-DBIG_ENDIAN)
+    else()
+        add_definitions(-DLITTLE_ENDIAN)
+    endif()
+
+    set(PROJECT_SOURCES
+            Net/AbstractPacket.h
+            Common/main.cpp
+            GUI/mainwindow.cpp
+            GUI/mainwindow.h
+            GUI/mainwindow.ui
+            Common/packettable.h
+            Common/packettable.cpp
+            Common/analyzer.h
+            Common/analyzer.cpp
+            Net/networklistener.h
+            Windows/networklistenerwin.h
+            Windows/networklistenerwin.cpp
+            Net/networklistenerfactory.h
+            GUI/lindeviceswidges.ui
+            GUI/lindeviceswidges.h
+            GUI/lindeviceswidges.cpp
+            Net/networkdevice.h
+            Net/networkdevice.cpp
+            Net/networkdevicefactory.cpp
+            Net/EthernetHeader.h
+            Net/EthernetIIHeader.h
+            Net/ProtocolHeader.h
+            Net/IPv4Header.h
+            Net/TransportHeader.h
+            Net/TCPHeader.h
+            Net/UDPHeader.h
+            Net/IPv6Header.h
+            Common/packethandler.h
+            Common/packethandler.cpp
+            Common/utiles.h
+            printerchooserwidget.h
+            printerchooserwidget.cpp
+            printerchooserwidget.ui
+            GUI/terminal.h
+            GUI/terminal.cpp
+            GUI/terminal.ui
+            GUI/viewsettingsdialog.h
+            GUI/viewsettingsdialog.cpp
+            GUI/viewsettingsdialog.ui
+            GUI/packetviewer.ui
+            GUI/packetviewer.h
+            GUI/packetviewer.cpp
+            GUI/memoryusagedialog.ui
+            GUI/memoryusagedialog.h
+            GUI/memoryusagedialog.cpp
+            Common/outputmanager.h
+            Common/outputmanager.cpp
+            Common/littleendianparser.h
+            Common/StringUtiles.h
+            Common/ViewSettings.h
+            Common/settings.cpp
+            Common/packetsstorage.h
+            Common/packetsstorage.cpp
+        )
+endif(WIN32)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(BigBrother
