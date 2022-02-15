@@ -23,5 +23,6 @@ jobs:
         ls
         cd ${{env.APP_PATH}}
         ls
+	cd src/
         cmake .
         make    
