@@ -23,7 +23,5 @@ jobs:
         ls
         cd ${{env.APP_PATH}}
         ls
-        mkdir ../build 
-        cd ../build
-        cmake ../src
+        cmake .
         make    
