@@ -1,0 +1,29 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ Windows]
+    
+env:
+  APP_PATH: "BigBrother/src"
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+        
+    - name: buildSolution
+      run: |
+        ls
+        cd ${{env.APP_PATH}}
+        ls
+        mkdir ../build 
+        cd ../build
+        cmake ../src
+        make    
